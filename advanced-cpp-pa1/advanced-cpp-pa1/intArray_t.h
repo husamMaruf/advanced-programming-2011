@@ -4,6 +4,8 @@
 
 #define CAPACITY_EXPAND_FACTOR 16
 
+using namespace std;
+
 class intArray_t {
 public:
 	intArray_t();
@@ -23,8 +25,7 @@ public:
 	void removeAndDeleteAll();
 	int append(int index, int* element);
 	int prepend(int index, int* element);
-	void printArray();
-
+	ostream& printToStream(ostream& os) const;
 private:
 	void expand(int addedCapacity);
 	int addElement(int index, int* element, bool isPrepend);
@@ -32,3 +33,5 @@ private:
 	int cap;
 	int length;
 };
+
+ostream &operator<<(ostream& os, const intArray_t& intArray);
