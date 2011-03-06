@@ -6,16 +6,16 @@
 
 class intArray_t {
 public:
-	intArray_t(); //Default CTOR
+	intArray_t();
 	intArray_t(int initCapacity);
 	~intArray_t();
 
-	int isEmpty() { return length == 0; }
-	int numOfItems() { return length; }
-	int capacity() { return cap; }
+	int isEmpty();
+	int numOfItems();
+	int capacity();
 	void insert(int* element);
-	int* first() { return intArray[0]; }
-	int* last() { return intArray[length-1]; }
+	int* first();
+	int* last();
 	int* find(int value);
 	int* remove(int value);
 	void removeAll();
