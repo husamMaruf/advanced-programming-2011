@@ -18,6 +18,26 @@ intArray_t::~intArray_t() {
 	delete[] intArray;
 }
 
+int intArray_t::isEmpty() {
+	return length == 0; 
+}
+
+int intArray_t::numOfItems() {
+	return length; 
+}
+
+int intArray_t::capacity() { 
+	return cap; 
+}
+
+int* intArray_t::first() { 
+	return intArray[0]; 
+}
+
+int* intArray_t::last() {
+	return intArray[length-1]; 
+}
+
 void intArray_t::expand(int addedCapacity) {
 	cap += addedCapacity;
 	int** newIntArray = new int*[cap];
@@ -38,6 +58,10 @@ int* intArray_t::remove(int value) {
 	}
 	length--;
 	return element;
+}
+
+void intArray_t::insert(int* element) {
+	append(length-1, element);
 }
 
 int intArray_t::append(int index, int* element) {
