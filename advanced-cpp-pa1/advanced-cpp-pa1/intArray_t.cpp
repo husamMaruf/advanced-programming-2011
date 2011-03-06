@@ -14,6 +14,10 @@ intArray_t::intArray_t(int initCapacity) {
 	length = 0;
 }
 
+intArray_t::~intArray_t() {
+	delete[] intArray;
+}
+
 void intArray_t::expand(int addedCapacity) {
 	cap += addedCapacity;
 	int** newIntArray = new int*[cap];
@@ -24,8 +28,42 @@ void intArray_t::expand(int addedCapacity) {
 	intArray = newIntArray;
 }
 
+int* intArray_t::remove(int value) {
+	int i;
+	for (i=0; i < length && *(intArray[i]) != value; i++);
+	if (i == length) return NULL;
+	int* element = intArray[i];
+	for (; i+1 < length; i++) {
+		intArray[i] = intArray[i+1];
+	}
+	length--;
+	return element;
+}
+
 int intArray_t::append(int index, int* element) {
 	return addElement(index, element, false);
+}
+
+void intArray_t::removeAll() {
+	length = 0;
+}
+
+int intArray_t::removeAndDelete(int value) {
+	int* element = remove(value);
+	if (element) {
+		delete element;
+		return 1;
+	}
+	return 0;
+}
+
+void intArray_t::removeAndDeleteAll() {
+	for (int i=0; i < length; i++) {
+		delete intArray[i];
+	}
+	delete[] intArray;
+	cap = 0;
+	length = 0;
 }
 
 int intArray_t::prepend(int index, int* element) {
