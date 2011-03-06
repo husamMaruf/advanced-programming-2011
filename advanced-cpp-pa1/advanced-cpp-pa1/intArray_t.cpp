@@ -19,23 +19,23 @@ intArray_t::~intArray_t() {
 	delete[] intArray;
 }
 
-int intArray_t::isEmpty() {
+int intArray_t::isEmpty() const {
 	return length == 0; 
 }
 
-int intArray_t::numOfItems() {
+int intArray_t::numOfItems() const {
 	return length; 
 }
 
-int intArray_t::capacity() { 
+int intArray_t::capacity() const { 
 	return cap; 
 }
 
-int* intArray_t::first() { 
+int* intArray_t::first() const { 
 	return intArray[0]; 
 }
 
-int* intArray_t::last() {
+int* intArray_t::last() const {
 	return intArray[length-1]; 
 }
 
@@ -49,18 +49,6 @@ void intArray_t::expand(int addedCapacity) {
 	intArray = newIntArray;
 }
 
-int* intArray_t::remove(int value) {
-	int i;
-	for (i=0; i < length && *(intArray[i]) != value; i++);
-	if (i == length) return NULL;
-	int* element = intArray[i];
-	for (; i+1 < length; i++) {
-		intArray[i] = intArray[i+1];
-	}
-	length--;
-	return element;
-}
-
 void intArray_t::insert(int* element) {
 	if (length == cap) {
 		expand(CAPACITY_EXPAND_FACTOR);
@@ -71,29 +59,6 @@ void intArray_t::insert(int* element) {
 
 int intArray_t::append(int index, int* element) {
 	return addElement(index, element, false);
-}
-
-void intArray_t::removeAll() {
-	length = 0;
-}
-
-int intArray_t::removeAndDelete(int value) {
-	int* element = remove(value);
-	if (element) {
-		delete element;
-		return 1;
-	}
-	return 0;
-}
-
-//TODO
-void intArray_t::removeAndDeleteAll() {
-	for (int i=0; i < length; i++) {
-		delete intArray[i];
-	}
-	delete[] intArray;
-	cap = 0;
-	length = 0;
 }
 
 int intArray_t::prepend(int index, int* element) {
@@ -116,13 +81,47 @@ int intArray_t::addElement(int index, int* element, bool isPrepend) {
 	return 1;
 }
 
-int* intArray_t::find(int value) {
+int* intArray_t::find(int value) const {
 	for (int i=0; i<length; i++) {
 		if (*intArray[i] == value) {
 			return intArray[i];
 		}
 	}
 	return 0;
+}
+
+int* intArray_t::remove(int value) {
+	int i;
+	for (i=0; i < length && *(intArray[i]) != value; i++);
+	if (i == length) return NULL;
+	int* element = intArray[i];
+	for (; i+1 < length; i++) {
+		intArray[i] = intArray[i+1];
+	}
+	length--;
+	return element;
+}
+
+void intArray_t::removeAll() {
+	length = 0;
+}
+
+int intArray_t::removeAndDelete(int value) {
+	int* element = remove(value);
+	if (element) {
+		delete element;
+		return 1;
+	}
+	return 0;
+}
+
+void intArray_t::removeAndDeleteAll() {
+	for (int i=0; i < length; i++) {
+		delete intArray[i];
+	}
+	//delete[] intArray; //TODO Check
+	//cap = 0;
+	length = 0;
 }
 
 ostream& intArray_t::printToStream(ostream& os) const {

@@ -10,15 +10,16 @@ class intArray_t {
 public:
 	intArray_t();
 	intArray_t(int initCapacity);
+	intArray_t(const intArray_t &arr);
 	~intArray_t();
 
-	int isEmpty();
-	int numOfItems();
-	int capacity();
+	int isEmpty() const;
+	int numOfItems() const;
+	int capacity() const;
 	void insert(int* element);
-	int* first();
-	int* last();
-	int* find(int value);
+	int* first() const;
+	int* last() const;
+	int* find(int value) const;
 	int* remove(int value);
 	void removeAll();
 	int removeAndDelete(int value);
