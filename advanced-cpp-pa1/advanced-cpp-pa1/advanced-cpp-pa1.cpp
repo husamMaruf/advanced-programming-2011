@@ -5,7 +5,7 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[]) {
 
-	intArray_t::intArray_t arr;
+	intArray_t arr;
 
 	while(1) {
 		cout << "\n| n | fst | lst | empty | ins | rmv | RmvAll |A|P| < | : ";
@@ -14,7 +14,9 @@ int _tmain(int argc, _TCHAR* argv[]) {
 
 		if (c!='n' && c!='f' && c!='l' && c!='e' && c!='i' && c!='r' && c!='R' && c!='<' && c!='A' && c!='P' )   
 			break;
-
+		int* val = new int;
+		int succ;
+		int index;
 		switch (c) {
 			case 'n' : 
 				cout << arr.numOfItems() << endl; 
@@ -29,19 +31,29 @@ int _tmain(int argc, _TCHAR* argv[]) {
 				cout << (arr.isEmpty() ? "Empty" : "No") << endl; 
 				break;
 			case 'i' :  
-				// insert
+				cout << "Enter int:"; 
+				cin >> *val;
+				arr.insert(val);
 				break;
 			case 'r' :  
-				// remove
+				cout << "Enter int:"; 
+				cin >> *val;
+				arr.insert(val);
 				break;
 			case 'R' :  
-				// remove all
+				arr.removeAll();
 				break;
 			case 'A' :  
-				// append
+				cout << "Enter int value and int index:"; 
+				cin >> *val >> index;
+				succ = arr.append(index,val);
+				cout << (succ ? "Success" : "Failed");
 				break;
 			case 'P' : 
-				// prepend
+				cout << "Enter int value and int index:"; 
+				cin >> *val >> index;
+				succ = arr.prepend(index,val);
+				cout << (succ ? "Success" : "Failed");
 				break;
 			case '<' : 
 				// print array
