@@ -62,7 +62,11 @@ int* intArray_t::remove(int value) {
 }
 
 void intArray_t::insert(int* element) {
-	append(length-1, element);
+	if (length == cap) {
+		expand(CAPACITY_EXPAND_FACTOR);
+	}
+	intArray[length] = element;
+	length++;
 }
 
 int intArray_t::append(int index, int* element) {
