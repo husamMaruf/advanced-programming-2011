@@ -175,6 +175,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\intArray_t.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\stdafx.cpp"
 				>
 				<FileConfiguration
@@ -200,6 +204,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath=".\intArray_t.h"
+				>
+			</File>
 			<File
 				RelativePath=".\stdafx.h"
 				>

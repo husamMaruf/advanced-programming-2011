@@ -6,6 +6,7 @@
 #pragma once
 
 #include "targetver.h"
+#include "intArray_t.cpp"
 
 #include <stdio.h>
 #include <tchar.h>
