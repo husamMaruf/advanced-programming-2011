@@ -86,6 +86,7 @@ int intArray_t::removeAndDelete(int value) {
 	return 0;
 }
 
+//TODO
 void intArray_t::removeAndDeleteAll() {
 	for (int i=0; i < length; i++) {
 		delete intArray[i];
@@ -124,13 +125,18 @@ int* intArray_t::find(int value) {
 	return 0;
 }
 
-void intArray_t::printArray() {
-	cout << "[";
+ostream& intArray_t::printToStream(ostream& os) const {
+	os << "[";
 	if (length > 0) {
-		cout << *intArray[0];
+		os << *intArray[0];
 		for (int i=1; i<length; i++) {
-			cout << ", " << *intArray[i];
+			os << ", " << *intArray[i];
 		}
 	}
-	cout << "]";
+	os << "]";
+	return os;
+}
+
+ostream &operator<<(ostream& os, const intArray_t& intArray) {
+	return intArray.printToStream(os);
 }
