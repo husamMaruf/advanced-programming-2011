@@ -119,3 +119,14 @@ int* intArray_t::find(int value) {
 	}
 	return 0;
 }
+
+void printArray() {
+	cout << "[";
+	if (length > 0) {
+		cout << *intArray[0];
+		for (int i=1; i<length; i++) {
+			cout << ", " << *intArray[i];
+		}
+	}
+	cout << "]";
+}

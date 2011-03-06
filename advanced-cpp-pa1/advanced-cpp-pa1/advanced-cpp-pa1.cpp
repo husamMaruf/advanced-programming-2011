@@ -56,7 +56,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 				cout << (succ ? "Success" : "Failed");
 				break;
 			case '<' : 
-				// print array
+				arr.printArray();
 				break;
 		}
 	}
