@@ -15,6 +15,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 		if (c!='n' && c!='f' && c!='l' && c!='e' && c!='i' && c!='r' && c!='R' && c!='<' && c!='A' && c!='P' )   
 			break;
 		int* val = new int;
+		int value;
 		int succ;
 		int index;
 		switch (c) {
@@ -37,8 +38,8 @@ int _tmain(int argc, _TCHAR* argv[]) {
 				break;
 			case 'r' :  
 				cout << "Enter int:"; 
-				cin >> *val;
-				arr.insert(val);
+				cin >> value;
+				arr.remove(value);
 				break;
 			case 'R' :  
 				arr.removeAll();
