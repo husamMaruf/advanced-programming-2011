@@ -120,7 +120,7 @@ int* intArray_t::find(int value) {
 	return 0;
 }
 
-void printArray() {
+void intArray_t::printArray() {
 	cout << "[";
 	if (length > 0) {
 		cout << *intArray[0];
