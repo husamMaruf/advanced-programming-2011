@@ -23,6 +23,7 @@ public:
 	void removeAndDeleteAll();
 	int append(int index, int* element);
 	int prepend(int index, int* element);
+	void printArray();
 
 private:
 	void expand(int addedCapacity);
