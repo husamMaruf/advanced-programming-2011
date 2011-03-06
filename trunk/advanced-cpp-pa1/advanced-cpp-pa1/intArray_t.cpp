@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "intArray_t.h"
 
 using namespace std;
