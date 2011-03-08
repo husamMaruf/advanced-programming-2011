@@ -8,11 +8,12 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	intArray_t arr;
 
 	while(1) {
-		cout << "\n| n | fst | lst | empty | ins | rmv | RmvAll |A|P| < | : ";
+		cout << "\n| n | f | lst | empty | c | ins | rmv | RmvAll | A| P | < | d | D : ";
 		char c;
 		cin >> c;
 
-		if (c!='n' && c!='f' && c!='l' && c!='e' && c!='i' && c!='r' && c!='R' && c!='<' && c!='A' && c!='P' )   
+		if (c!='n' && c!='f' && c!='l' && c!='e' && c!='i' && c!='r' && c!='R' && c!='<' && c!='A' && c!='P' && c!='c' 
+			&& c!='d' && c!='D')   
 			break;
 		int* val = new int;
 		int value;
@@ -23,41 +24,60 @@ int _tmain(int argc, _TCHAR* argv[]) {
 				cout << arr.numOfItems() << endl; 
 				break;
 			case 'f' :  
-				cout << *arr.first() << endl;   
+				if (!arr.isEmpty()) {
+					cout << *arr.first() << endl;   
+				}
 				break;
 			case 'l' : 
-				cout << *arr.last() << endl;      
+				if (!arr.isEmpty()) { 
+					cout << *arr.last() << endl;
+				}
+				break;
+			case 'c':
+				cout << arr.capacity() << endl;
 				break;
 			case 'e' : 
 				cout << (arr.isEmpty() ? "Empty" : "No") << endl; 
 				break;
 			case 'i' :  
-				cout << "Enter int:"; 
+				cout << "Enter int value:" << endl; 
 				cin >> *val;
 				arr.insert(val);
+				cout << "Put " << *val << " in array" << endl;
 				break;
 			case 'r' :  
-				cout << "Enter int:"; 
+				cout << "Enter int value to remove:" << endl; 
 				cin >> value;
-				arr.remove(value);
+				cout << "Removed:" << *arr.remove(value) << endl;
 				break;
 			case 'R' :  
 				arr.removeAll();
+				cout << "Removed all" << endl;
 				break;
 			case 'A' :  
-				cout << "Enter int value and int index:"; 
-				cin >> *val >> index;
+				cout << "Enter int index followed by an int value:" << endl; 
+				cin >> index >> *val;
 				succ = arr.append(index,val);
-				cout << (succ ? "Success" : "Failed");
+				cout << (succ ? "Success" : "Failed") << endl;
 				break;
 			case 'P' : 
-				cout << "Enter int value and int index:"; 
-				cin >> *val >> index;
+				cout << "Enter int index followed by an int value:" << endl; 
+				cin >> index >> *val;
 				succ = arr.prepend(index,val);
-				cout << (succ ? "Success" : "Failed");
+				cout << (succ ? "Success" : "Failed") << endl;
+				break;
+			case 'd':
+				cout << "Enter int value to remove and delete:" << endl; 
+				cin >> value;
+				succ = arr.removeAndDelete(value);
+				cout << (succ ? "Success" : "Failed") << endl;
+				break;
+			case 'D':
+				arr.removeAndDeleteAll();
+				cout << "Removed and deleted all elements in array" << endl;
 				break;
 			case '<' : 
-				cout << arr;
+				cout << arr << endl;
 				break;
 		}
 	}

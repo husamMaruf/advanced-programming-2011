@@ -32,10 +32,18 @@ int intArray_t::capacity() const {
 }
 
 int* intArray_t::first() const { 
+	if (length == 0) {
+		return NULL;
+	}
+	
 	return intArray[0]; 
 }
 
 int* intArray_t::last() const {
+	if (length == 0) {
+		return NULL;
+	}
+
 	return intArray[length-1]; 
 }
 
@@ -65,6 +73,7 @@ int intArray_t::prepend(int index, int* element) {
 	return addElement(index, element, true);
 }
 
+// helper function for append and prepend (array has to contains at least 1 element)
 int intArray_t::addElement(int index, int* element, bool isPrepend) {
 	if (index < 0 || index > length-1) {
 		return 0;
