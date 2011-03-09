@@ -21,7 +21,7 @@ int _tmain(int argc, _TCHAR* argv[]) {
 	while(1) {
 		cout << "\n| n(numOfElements) | f(first) | l(last) | e(empty) | c(capacity) |";
 		cout << "\n  i(insert) | r(remove) | R(removeAll) | A(append) |";
-		cout << "\n  P(prepend) | <(print) | d(removeAndDelete) | D(removeAndDelete) : ";
+		cout << "\n  P(prepend) | <(print) | d(removeAndDelete) | D(removeAndDeleteAll) : ";
 		char c;
 		cin >> c;
 
