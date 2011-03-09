@@ -19,34 +19,6 @@ intArray_t::~intArray_t() {
 	delete[] intArray;
 }
 
-int intArray_t::isEmpty() const {
-	return length == 0; 
-}
-
-int intArray_t::numOfItems() const {
-	return length; 
-}
-
-int intArray_t::capacity() const { 
-	return cap; 
-}
-
-int* intArray_t::first() const { 
-	if (length == 0) {
-		return NULL;
-	}
-	
-	return intArray[0]; 
-}
-
-int* intArray_t::last() const {
-	if (length == 0) {
-		return NULL;
-	}
-
-	return intArray[length-1]; 
-}
-
 void intArray_t::expand(const int& addedCapacity) {
 	cap += addedCapacity;
 	int** newIntArray = new int*[cap];
@@ -109,10 +81,6 @@ int* intArray_t::remove(const int& value) {
 	}
 	length--;
 	return element;
-}
-
-void intArray_t::removeAll() {
-	length = 0;
 }
 
 int intArray_t::removeAndDelete(const int& value) {
