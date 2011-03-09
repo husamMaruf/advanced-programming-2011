@@ -83,6 +83,10 @@ int* intArray_t::remove(const int& value) {
 	return element;
 }
 
+void intArray_t::removeAll() {
+	length = 0; 
+}
+
 int intArray_t::removeAndDelete(const int& value) {
 	int* element = remove(value);
 	if (element) {
