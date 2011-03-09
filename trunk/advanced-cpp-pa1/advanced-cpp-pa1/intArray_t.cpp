@@ -9,7 +9,7 @@ intArray_t::intArray_t() {
 	length = 0;
 }
 
-intArray_t::intArray_t(int initCapacity) {
+intArray_t::intArray_t(const int& initCapacity) {
 	intArray = new int*[initCapacity];
 	cap = initCapacity;
 	length = 0;
@@ -47,7 +47,7 @@ int* intArray_t::last() const {
 	return intArray[length-1]; 
 }
 
-void intArray_t::expand(int addedCapacity) {
+void intArray_t::expand(const int& addedCapacity) {
 	cap += addedCapacity;
 	int** newIntArray = new int*[cap];
 	for (int i=0; i<length; i++) {
@@ -65,16 +65,16 @@ void intArray_t::insert(int* element) {
 	length++;
 }
 
-int intArray_t::append(int index, int* element) {
+int intArray_t::append(const int& index, int* element) {
 	return addElement(index, element, false);
 }
 
-int intArray_t::prepend(int index, int* element) {
+int intArray_t::prepend(const int& index, int* element) {
 	return addElement(index, element, true);
 }
 
 // helper function for append and prepend (array has to contains at least 1 element)
-int intArray_t::addElement(int index, int* element, bool isPrepend) {
+int intArray_t::addElement(const int& index, int* element, bool isPrepend) {
 	if (index < 0 || index > length-1) {
 		return 0;
 	}
@@ -90,7 +90,7 @@ int intArray_t::addElement(int index, int* element, bool isPrepend) {
 	return 1;
 }
 
-int* intArray_t::find(int value) const {
+int* intArray_t::find(const int& value) const {
 	for (int i=0; i<length; i++) {
 		if (*intArray[i] == value) {
 			return intArray[i];
@@ -99,7 +99,7 @@ int* intArray_t::find(int value) const {
 	return 0;
 }
 
-int* intArray_t::remove(int value) {
+int* intArray_t::remove(const int& value) {
 	int i;
 	for (i=0; i < length && *(intArray[i]) != value; i++);
 	if (i == length) return NULL;
@@ -115,7 +115,7 @@ void intArray_t::removeAll() {
 	length = 0;
 }
 
-int intArray_t::removeAndDelete(int value) {
+int intArray_t::removeAndDelete(const int& value) {
 	int* element = remove(value);
 	if (element) {
 		delete element;
@@ -128,8 +128,6 @@ void intArray_t::removeAndDeleteAll() {
 	for (int i=0; i < length; i++) {
 		delete intArray[i];
 	}
-	//delete[] intArray; //TODO Check
-	//cap = 0;
 	length = 0;
 }
 
