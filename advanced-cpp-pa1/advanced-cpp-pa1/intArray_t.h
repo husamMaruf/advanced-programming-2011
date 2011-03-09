@@ -17,7 +17,7 @@ public:
 	int* first() const { return isEmpty() ? NULL : intArray[0]; }
 	int* last() const { return isEmpty() ? NULL : intArray[length-1]; }
 	int* remove(const int& value);
-	void removeAll() { length = 0; }
+	void removeAll();
 	int removeAndDelete(const int& value);
 	void removeAndDeleteAll();
 	void insert(int* element);
