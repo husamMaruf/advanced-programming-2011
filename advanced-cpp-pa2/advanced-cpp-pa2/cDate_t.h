@@ -23,7 +23,7 @@ public:
 	cDate_t();
 	cDate_t(const cDate_t& cDate);
 	cDate_t(int day, int month, int year);
-	~cDate_t();
+	// ~cDate_t(); no extra memory is allocated
 
 	const cDate_t& operator=(const cDate_t& cDate);
 	const cDate_t& operator+=(int increment) throw(int);
