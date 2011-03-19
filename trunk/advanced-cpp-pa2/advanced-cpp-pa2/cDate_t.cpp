@@ -41,10 +41,6 @@ cDate_t::cDate_t(int day, int month, int year) {
 	}
 }
 
-cDate_t::~cDate_t() {
-	// nothing to clean up
-}
-
 const cDate_t& cDate_t::operator=(const cDate_t& cDate) {
 	if (this != &cDate) {
 		current_time = cDate.current_time;
