@@ -42,21 +42,21 @@ ostream& operator<<(ostream& os, const cTime_t& t) {
 		return os << t.getHour() << ":" << t.getMinute() << ":" << t.getSecond() << endl;
 	} else {
 		int formatedHour = t.getHour();
-		string str;
+		string str = "AM";
 		if (formatedHour > 12) {
 			formatedHour -= 12;
 			str = "PM";
-		} else {
-			str = "AM";
 		}
 		return os << formatedHour << ":" << t.getMinute() << ":" << t.getSecond() << " " << str << endl;
 	}
 }
 
 const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
-	setTime((getHour() + otherTime.getHour()) % 24, 
-			(getMinute() + otherTime.getMinute()) % 60, 
-			(getSecond() + otherTime.getSecond()) % 60);
+	int newSec = getSecond() + otherTime.getSecond();
+	int carry = (newSec >= 60) ? 1 : 0;
+	int newMin = getMinute() + otherTime.getMinute() + carry;
+	carry = (newMin >= 60) ? 1 : 0;
+	setTime((getHour() + otherTime.getHour() + carry) % 24, newMin % 60, newSec % 60);
 	return *this;
 }
 
@@ -83,6 +83,7 @@ void cTime_t::printTime(const int& format) {
 
 //TEST PROGRAM
 int main( int argc, char *argv[] ) {
+	//CTOR test:
 	cTime_t t1;
 	cout << t1;
 	cTime_t t2(8,8,8);
@@ -91,14 +92,17 @@ int main( int argc, char *argv[] ) {
 	cout << t3;
 	cout << endl;
 
+	//Print test:
 	t1.printTime(2);
 	t2.printTime(2);
 	cout << endl;
 
+	//Assignment test:
 	cTime_t t4 = t1;
 	cout << t4;
 	cout << endl;
 
+	//Add test:
 	t2.printTime(1);
 	t2 += t2;
 	cout << t2;
@@ -107,9 +111,23 @@ int main( int argc, char *argv[] ) {
 	t2 += t2;
 	cout << t2;
 	cout << endl;
-	
+
+	//Add with carry test:
+	cTime_t t5(20,58,59);
+	cTime_t t6(0,0,1);
+	cTime_t t7(0,0,59);
+	cout << t5;
+	t5 += t6;
+	cout << t5;
+	t5 += t7;
+	cout << t5;
+	t5 += t6;
+	cout << t5;
+	cout << endl;
+
+	//Exception test:
 	try {
-		cTime_t t5(26,8,8);
+		cTime_t t8(26,8,8);
 	} catch(const char* ex) {
 		cout << ex << endl;
 	}
