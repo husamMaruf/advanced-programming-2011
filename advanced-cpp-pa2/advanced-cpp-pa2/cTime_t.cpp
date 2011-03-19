@@ -16,7 +16,12 @@ cTime_t::cTime_t(const cTime_t& otherTime) {
 
 cTime_t::cTime_t(const int& hour, const int& minutes, const int& seconds) {
 	current_time = new tm;
-	setTime(hour,minutes,seconds);
+	try {
+		setTime(hour,minutes,seconds);
+	} catch(const char* ex) {	
+		delete current_time;
+		throw;
+	}
 	format = DEFAULT_FORMAT;
 }
 
@@ -56,15 +61,19 @@ const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
 }
 
 void cTime_t::setTime(const int& hour, const int& minutes, const int& seconds) {
+	if (hour < 0 || hour >= 24 || minutes < 0 || minutes >= 60 || seconds < 0 || seconds >= 60) {
+		throw ("Illegal arguments");
+	}
 	current_time->tm_hour = hour;
 	current_time->tm_min = minutes;
 	current_time->tm_sec = seconds;
 }
 
 void cTime_t::setFormat(const int& new_format) {
-	if (new_format >= 1 && new_format <= 2) {
-		format = new_format;
+	if (new_format != 1 && new_format != 2) {
+		throw ("Illegal arguments");
 	}
+	format = new_format;
 }
 
 void cTime_t::printTime(const int& format) {
@@ -97,7 +106,13 @@ int main( int argc, char *argv[] ) {
 	cout << t2;
 	t2 += t2;
 	cout << t2;
-		cout << endl;
+	cout << endl;
+	
+	try {
+		cTime_t t5(26,8,8);
+	} catch(const char* ex) {
+		cout << ex << endl;
+	}
 
 	system("Pause");
 }
