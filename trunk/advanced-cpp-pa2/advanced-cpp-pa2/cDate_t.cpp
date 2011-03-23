@@ -12,6 +12,8 @@ const char* cDate_t::dayNames[] = {
 	"Saturday" 
 };
 
+const cDate_t::PrintFormat cDate_t::DEFAULT_PRINT_FORMAT = European;
+
 void cDate_t::defaultInit() {
 	time_t time_date = time(0);
 	current_time = *localtime(&time_date);
@@ -28,17 +30,14 @@ cDate_t::cDate_t(const cDate_t& cDate) {
 }
 
 // if passed parameters are illegal, default date object will be constructed (current date)
-cDate_t::cDate_t(int day, int month, int year) {
+cDate_t::cDate_t(int day, int month, int year) throw(int) {
 
 	// this is needed so mktime (in setDate) will work properly
+	// also needed to set default PrintFormat
 	defaultInit();
 
-	try {
-		setDate(day,month,year);
-	} catch (int exceptionId) {
-		// no need to check exception id as only one is thrown
-		// nothing to do, setDate maintained old value which was set with defaultInit()
-	}
+	setDate(day,month,year);
+
 }
 
 const cDate_t& cDate_t::operator=(const cDate_t& cDate) {
