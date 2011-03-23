@@ -22,13 +22,21 @@ public:
 
 	cDate_t();
 	cDate_t(const cDate_t& cDate);
-	cDate_t(int day, int month, int year);
+
+	// throws ILLEGAL_DATE_PARAMS
+	cDate_t(int day, int month, int year) throw(int);
+	
 	// ~cDate_t(); no extra memory is allocated
 
 	const cDate_t& operator=(const cDate_t& cDate);
+
+	// throws ILLEGAL_INCREMENT_VALUE and OPERATION_BOUND_ERROR
 	const cDate_t& operator+=(int increment) throw(int);
+	
+	// throws ILLEGAL_DECREMENT_VALUE and OPERATION_BOUND_ERROR
 	const cDate_t& operator-=(int decrement) throw(int);
 
+	// throws ILLEGAL_DATE_PARAMS
 	void setDate(int day, int month, int year) throw(int);
 
 	int getCurrentDay() const;
@@ -49,7 +57,7 @@ private:
 	
 	static const char* monthNames[];
 	static const char* dayNames[];
-	static const PrintFormat DEFAULT_PRINT_FORMAT = European;
+	static const PrintFormat DEFAULT_PRINT_FORMAT;
 
 	void defaultInit();
 
