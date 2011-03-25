@@ -2,7 +2,7 @@
 #include "cDate_t.h"
 
 
-virtual const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
+virtual const cTime_t& cTimeDate_t::operator+=(const cTime_t& otherTime) {
 	cTime_t::operator+=(otherTime);
 	if (isAddCarry()) {
 		cDate_t::operator+=(1);
