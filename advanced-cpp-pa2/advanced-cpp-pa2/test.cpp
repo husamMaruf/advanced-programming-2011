@@ -89,5 +89,19 @@ int cTime_t_main(int argc, char *argv[]) {
 }
 
 int main(int argc, char *argv[]) {
-	return cTime_t_main(argc,argv);
+	//return cTime_t_main(argc,argv);
+
+	cTimeDate_t timedate;
+	
+	cTime_t time(23,59,59);
+	
+	cout << timedate << endl;
+
+	timedate += time;
+
+	cout << timedate << endl;
+
+	int i;
+	cin >> i;
+
 }
