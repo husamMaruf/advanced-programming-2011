@@ -2,10 +2,11 @@
 
 #include <iostream>
 #include <time.h> 
+#include "cTime_t.h"
+#include "cDate_t.h"
 
-
-class cTimeDate_t: public cTime_t, public cDate_t {
+class cTimeDate_t:public cTime_t,public cDate_t {
 public:
-	virtual const cTime_t& operator+=(const cTime_t&);
+	const cTime_t& operator+=(const cTime_t&);
 }
 

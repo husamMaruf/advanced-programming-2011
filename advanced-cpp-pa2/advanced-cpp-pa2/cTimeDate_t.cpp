@@ -1,8 +1,6 @@
-#include "cTime_t.h"
-#include "cDate_t.h"
+#include "cTimeDate_t.h"
 
-
-virtual const cTime_t& cTimeDate_t::operator+=(const cTime_t& otherTime) {
+const cTime_t& cTimeDate_t::operator+=(const cTime_t& otherTime) {
 	cTime_t::operator+=(otherTime);
 	if (isAddCarry()) {
 		cDate_t::operator+=(1);

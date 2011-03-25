@@ -14,7 +14,7 @@ public:
 	cTime_t(const int& hour, const int& minutes, const int& seconds) throw(const char*);
 	//~cTime_t(); // Default DTOR because we don't allocate memory on heap
 	const cTime_t& operator=(const cTime_t&);
-	virtual const cTime_t& operator+=(const cTime_t&);
+	const cTime_t& operator+=(const cTime_t&);
 	void setTime(const int& hour, const int& minutes, const int& seconds) throw(const char*);
 	void printTime(const int& format);
 	const int& getHour() const { return current_time.tm_hour; }
