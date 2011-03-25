@@ -38,7 +38,7 @@ ostream& operator<<(ostream& os, const cTime_t& t) {
 	}
 }
 
-virtual const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
+const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
 	int newSec = getSecond() + otherTime.getSecond();
 	int carry = (newSec >= 60) ? 1 : 0;
 	int newMin = getMinute() + otherTime.getMinute() + carry;
