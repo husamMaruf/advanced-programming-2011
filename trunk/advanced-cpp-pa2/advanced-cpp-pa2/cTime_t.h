@@ -21,8 +21,8 @@ public:
 	const int& getMinute() const { return current_time.tm_min; }
 	const int& getSecond() const { return current_time.tm_sec; }
 	const int& getFormat() const { return format; }
-	bool isAddCarrt() const { return addCarry; }
 	void setFormat(const int& new_format) throw(const char*);
+	const bool& isAddCarry() const { return addCarry; }
 private:
 	int format;
 	bool addCarry;
