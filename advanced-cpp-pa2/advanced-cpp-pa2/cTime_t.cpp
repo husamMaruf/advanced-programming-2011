@@ -26,7 +26,7 @@ const cTime_t& cTime_t::operator=(const cTime_t& otherTime) {
 
 ostream& operator<<(ostream& os, const cTime_t& t) {
 	if (t.getFormat() == 1) {
-		return os << t.getHour() << ":" << t.getMinute() << ":" << t.getSecond() << endl;
+		return os << pad(t.getHour()) << ":" << pad(t.getMinute()) << ":" << pad(t.getSecond()) << endl;
 	} else {
 		int formatedHour = t.getHour();
 		string str = "AM";
@@ -34,8 +34,14 @@ ostream& operator<<(ostream& os, const cTime_t& t) {
 			formatedHour -= 12;
 			str = "PM";
 		}
-		return os << formatedHour << ":" << t.getMinute() << ":" << t.getSecond() << " " << str << endl;
+		return os << pad(formatedHour) << ":" << pad(t.getMinute()) << ":" << pad(t.getSecond()) << " " << str << endl;
 	}
+}
+
+string pad(const int& num) {
+	ostringstream buffer;
+	buffer << ((num < 10) ? "0" : "") << num;
+	return buffer.str();
 }
 
 const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
