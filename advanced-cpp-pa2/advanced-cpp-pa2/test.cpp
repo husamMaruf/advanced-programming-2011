@@ -202,7 +202,7 @@ void cDate_t_test() {
 				cin >> inc;
 
 				if (inc < 1) {
-					cout << "number is negative" << endl;
+					cout << "number is non-positive" << endl;
 					continue;
 				}
 
@@ -230,7 +230,7 @@ void cDate_t_test() {
 				cin >> dec;
 
 				if (dec < 1) {
-					cout << "number is negative" << endl;
+					cout << "number is non-positive" << endl;
 					continue;
 				}
 
