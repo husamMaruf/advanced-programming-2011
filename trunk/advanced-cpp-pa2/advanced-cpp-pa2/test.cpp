@@ -48,11 +48,13 @@ void cTime_t_test() {
 			case 'a':
 				cout << "choose t var to apply on (1 or 2):" << endl;
 				cin >> choice;
+				choice--;
 				tArr[choice] += tArr[(choice+1)%2];
 				break;
 			case 's':
 				cout << "choose t var to apply on (1 or 2):" << endl;
 				cin >> choice;
+				choice--;
 				int hour;
 				int min;
 				int sec;
@@ -71,6 +73,7 @@ void cTime_t_test() {
 			case 'p':
 				cout << "choose t var to apply on (1 or 2):" << endl;
 				cin >> choice;
+				choice--;
 				int format;
 				cout << "choose format:" << endl;
 				cin >> format;
