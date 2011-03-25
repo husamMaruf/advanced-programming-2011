@@ -2,17 +2,17 @@
 
 using namespace std;
 
-cTime_t::cTime_t():format(DEFAULT_FORMAT) {
+cTime_t::cTime_t():format(DEFAULT_FORMAT),addCarry(false) {
 	time_t 	time_date = time(0);
 	current_time = *localtime(&time_date);
 }
 
-cTime_t::cTime_t(const cTime_t& otherTime) {
+cTime_t::cTime_t(const cTime_t& otherTime):addCarry(false) {
 	setTime(otherTime.getHour(), otherTime.getMinute(), otherTime.getSecond());
 	format = otherTime.getFormat();
 }
 
-cTime_t::cTime_t(const int& hour, const int& minutes, const int& seconds):format(DEFAULT_FORMAT) {
+cTime_t::cTime_t(const int& hour, const int& minutes, const int& seconds):format(DEFAULT_FORMAT),addCarry(false) {
 	setTime(hour,minutes,seconds); // We let the CTOR throw the exception
 }
 
@@ -43,7 +43,9 @@ const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
 	int carry = (newSec >= 60) ? 1 : 0;
 	int newMin = getMinute() + otherTime.getMinute() + carry;
 	carry = (newMin >= 60) ? 1 : 0;
-	setTime((getHour() + otherTime.getHour() + carry) % 24, newMin % 60, newSec % 60);
+	int newHour = getHour() + otherTime.getHour() + carry;
+	addCarry = (newMin >= 24) ? true : false;
+	setTime(newHour % 24, newMin % 60, newSec % 60);
 	return *this;
 }
 
