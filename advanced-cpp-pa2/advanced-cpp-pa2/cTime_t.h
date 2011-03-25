@@ -23,6 +23,7 @@ public:
 	const int& getFormat() const { return format; }
 	void setFormat(const int& new_format) throw(const char*);
 	const bool& isAddCarry() const { return addCarry; }
+	virtual const cTime_t& add(const cTime_t& otherTime) { return operator+=(otherTime); }
 private:
 	int format;
 	bool addCarry;

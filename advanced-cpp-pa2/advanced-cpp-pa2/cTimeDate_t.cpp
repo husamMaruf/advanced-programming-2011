@@ -1,7 +1,7 @@
 #include "cTimeDate_t.h"
 
-const cTime_t& cTimeDate_t::operator+=(const cTime_t& otherTime) {
-	cTime_t::operator+=(otherTime);
+const cTime_t& cTimeDate_t::add(const cTime_t& otherTime) {
+	cTime_t::add(otherTime);
 	if (isAddCarry()) {
 		cDate_t::operator+=(1);
 	}
