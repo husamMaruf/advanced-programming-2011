@@ -2,31 +2,18 @@
 
 using namespace std;
 
-cTime_t::cTime_t() {
+cTime_t::cTime_t():format(DEFAULT_FORMAT) {
 	time_t 	time_date = time(0);
-	current_time = new tm(*localtime(&time_date));
-	format = DEFAULT_FORMAT;
+	current_time = *localtime(&time_date);
 }
 
 cTime_t::cTime_t(const cTime_t& otherTime) {
-	current_time = new tm;
 	setTime(otherTime.getHour(), otherTime.getMinute(), otherTime.getSecond());
 	format = otherTime.getFormat();
 }
 
-cTime_t::cTime_t(const int& hour, const int& minutes, const int& seconds) {
-	current_time = new tm;
-	try {
-		setTime(hour,minutes,seconds);
-	} catch(const char* ex) {	
-		delete current_time;
-		throw;
-	}
-	format = DEFAULT_FORMAT;
-}
-
-cTime_t::~cTime_t() {
-	delete current_time;
+cTime_t::cTime_t(const int& hour, const int& minutes, const int& seconds):format(DEFAULT_FORMAT) {
+	setTime(hour,minutes,seconds); // We let the CTOR throw the exception
 }
 
 const cTime_t& cTime_t::operator=(const cTime_t& otherTime) {
@@ -64,9 +51,9 @@ void cTime_t::setTime(const int& hour, const int& minutes, const int& seconds) {
 	if (hour < 0 || hour >= 24 || minutes < 0 || minutes >= 60 || seconds < 0 || seconds >= 60) {
 		throw ("Illegal arguments");
 	}
-	current_time->tm_hour = hour;
-	current_time->tm_min = minutes;
-	current_time->tm_sec = seconds;
+	current_time.tm_hour = hour;
+	current_time.tm_min = minutes;
+	current_time.tm_sec = seconds;
 }
 
 void cTime_t::setFormat(const int& new_format) {
@@ -83,54 +70,83 @@ void cTime_t::printTime(const int& format) {
 
 //TEST PROGRAM
 int main( int argc, char *argv[] ) {
-	//CTOR test:
-	cTime_t t1;
-	cout << t1;
-	cTime_t t2(8,8,8);
-	cout << t2;
-	cTime_t t3(t2);
-	cout << t3;
-	cout << endl;
-
-	//Print test:
-	t1.printTime(2);
-	t2.printTime(2);
-	cout << endl;
-
-	//Assignment test:
-	cTime_t t4 = t1;
-	cout << t4;
-	cout << endl;
-
-	//Add test:
-	t2.printTime(1);
-	t2 += t2;
-	cout << t2;
-	t2 += t2;
-	cout << t2;
-	t2 += t2;
-	cout << t2;
-	cout << endl;
-
-	//Add with carry test:
-	cTime_t t5(20,58,59);
-	cTime_t t6(0,0,1);
-	cTime_t t7(0,0,59);
-	cout << t5;
-	t5 += t6;
-	cout << t5;
-	t5 += t7;
-	cout << t5;
-	t5 += t6;
-	cout << t5;
-	cout << endl;
-
-	//Exception test:
-	try {
-		cTime_t t8(26,8,8);
-	} catch(const char* ex) {
-		cout << ex << endl;
+	cTime_t tArr[2];
+	char answer;
+	int choice;
+	bool quit = false;
+	while (!quit) {
+		cout << "n:new , a:add , s:set , p:print , q:quit" << endl;
+		cin >> answer;
+		switch (answer) {
+			case 'n':
+				cout << "choose t var to apply on (1 or 2):" << endl;
+				cin >> choice;
+				choice--;
+				int n;
+				cout << "choose CTOR: 1 - reg , 2 - Copy CTOR , 3 - Set time CTOR:" << endl;
+				cin >> n;
+				switch (n) {
+					case 1:
+						tArr[choice] = cTime_t();
+						break;
+					case 2:
+						tArr[choice] = cTime_t(tArr[(choice+1)%2]);
+						break;
+					case 3:
+						int hour;
+						int min;
+						int sec;
+						cout << "choose hour:" << endl;
+						cin >> hour;
+						cout << "choose min:" << endl;
+						cin >> min;
+						cout << "choose sec:" << endl;
+						cin >> sec;
+						try {
+							tArr[choice] = cTime_t(hour,min,sec);
+						} catch (const char* e) {
+							cout << e << endl;
+						}
+						break;
+				}
+				break;
+			case 'a':
+				cout << "choose t var to apply on (1 or 2):" << endl;
+				cin >> choice;
+				tArr[choice] += tArr[(choice+1)%2];
+				break;
+			case 's':
+				cout << "choose t var to apply on (1 or 2):" << endl;
+				cin >> choice;
+				int hour;
+				int min;
+				int sec;
+				cout << "choose hour:" << endl;
+				cin >> hour;
+				cout << "choose min:" << endl;
+				cin >> min;
+				cout << "choose sec:" << endl;
+				cin >> sec;
+				try {
+					tArr[choice].setTime(hour,min,sec);	
+				} catch (const char* e) {
+					cout << e << endl;
+				}
+				break;
+			case 'p':
+				cout << "choose t var to apply on (1 or 2):" << endl;
+				cin >> choice;
+				int format;
+				cout << "choose format:" << endl;
+				cin >> format;
+				tArr[choice].printTime(format);
+				break;
+			case 'q':
+				quit = true;
+				break;
+			default:
+				quit = true;
+		}
 	}
 
-	system("Pause");
 }
