@@ -183,7 +183,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\test.c"
+				RelativePath=".\test.cpp"
 				>
 			</File>
 		</Filter>
