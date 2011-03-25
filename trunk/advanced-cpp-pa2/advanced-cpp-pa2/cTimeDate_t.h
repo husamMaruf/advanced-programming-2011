@@ -11,3 +11,4 @@ public:
 	const cTimeDate_t& operator+=(const cTime_t&);
 };
 
+ostream& operator<<(ostream& os, const cTimeDate_t& t);
