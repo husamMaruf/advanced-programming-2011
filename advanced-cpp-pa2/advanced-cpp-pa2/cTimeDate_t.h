@@ -7,6 +7,7 @@
 
 class cTimeDate_t:public cTime_t,public cDate_t {
 public:
-	virtual const cTime_t& add(const cTime_t& otherTime);
+	virtual const cTimeDate_t& add(const cTime_t& otherTime);
+	const cTimeDate_t& operator+=(const cTime_t&);
 };
 
