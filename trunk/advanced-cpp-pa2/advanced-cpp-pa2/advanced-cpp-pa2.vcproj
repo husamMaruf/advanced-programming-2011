@@ -178,6 +178,14 @@
 				RelativePath=".\cTime_t.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\cTimeDate_t.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\test.c"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -190,6 +198,10 @@
 			</File>
 			<File
 				RelativePath=".\cTime_t.h"
+				>
+			</File>
+			<File
+				RelativePath=".\cTimeDate_t.h"
 				>
 			</File>
 		</Filter>

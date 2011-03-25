@@ -29,7 +29,7 @@ cDate_t::cDate_t(const cDate_t& cDate) {
 }
 
 // if passed parameters are illegal, default date object will be constructed (current date)
-cDate_t::cDate_t(int day, int month, int year) throw(int) : printFormat(DEFAULT_PRINT_FORMAT) {
+cDate_t::cDate_t(const int& day, const int& month, const int& year) throw(int) : printFormat(DEFAULT_PRINT_FORMAT) {
 
 	// this is needed so mktime (in setDate) will work properly
 	defaultInit();
@@ -46,7 +46,7 @@ const cDate_t& cDate_t::operator=(const cDate_t& cDate) {
 	return *this;
 }
 
-const cDate_t& cDate_t::operator+=(int increment) throw(int) {
+const cDate_t& cDate_t::operator+=(const int& increment) throw(int) {
 	if (increment < 0) {
 		throw ILLEGAL_INCREMENT_VALUE;
 	}
@@ -61,7 +61,7 @@ const cDate_t& cDate_t::operator+=(int increment) throw(int) {
 	}
 }
 
-const cDate_t& cDate_t::operator-=(int decrement) throw(int) {
+const cDate_t& cDate_t::operator-=(const int& decrement) throw(int) {
 	if (decrement < 0) {
 		throw ILLEGAL_DECREMENT_VALUE;
 	}
@@ -79,7 +79,7 @@ const cDate_t& cDate_t::operator-=(int decrement) throw(int) {
 
 // throws an exception if one of the date parameters is illegal
 // restores previous state of date object
-void cDate_t::setDate(int day, int month, int year) throw(int) {
+void cDate_t::setDate(const int& day, const int& month, const int& year) throw(int) {
 
 	if (day < 1 || month < 1 || month > 12 || year < 1970 || year > 3000) {
 		throw ILLEGAL_DATE_PARAMS;
@@ -115,24 +115,24 @@ void cDate_t::setDate(int day, int month, int year) throw(int) {
 
 }
 
-int cDate_t::getCurrentDay() const {
+const int& cDate_t::getDay() const {
 	return current_time.tm_mday; 
 }
 
-int cDate_t::getCurrentMonth() const {
+const int& cDate_t::getMonth() const {
 	return current_time.tm_mon+1;
 }
 
-int cDate_t::getCurrentYear() const {
+const int& cDate_t::getYear() const {
 	return current_time.tm_year+1900;
 }
 
-int cDate_t::getDayOfYear() const {
+const int& cDate_t::getDayOfYear() const {
 	return current_time.tm_yday+1;
 }
 
-bool cDate_t::isLeapYear() const {
-	return getCurrentYear() % 4 == 0;
+const bool& cDate_t::isLeapYear() const {
+	return getYear() % 4 == 0;
 }
 
 const char* cDate_t::getDayName() const {
@@ -143,16 +143,16 @@ const char* cDate_t::getMonthName() const {
 	return monthNames[current_time.tm_mon];
 }
 
-void cDate_t::printDate(PrintFormat format) {
+void cDate_t::printDate(const PrintFormat& format) {
 	setPrintFormat(format);
 	cout << *this;	
 }
 
-void cDate_t::setPrintFormat(PrintFormat format) {
+void cDate_t::setPrintFormat(const PrintFormat& format) {
 	printFormat = format;
 }
 
-cDate_t::PrintFormat cDate_t::getPrintFormat() const {
+const cDate_t::PrintFormat& cDate_t::getPrintFormat() const {
 	return printFormat;
 }
 
@@ -178,8 +178,3 @@ ostream& operator<<(ostream& os, const const cDate_t& cDate) {
 	return os;
 }
 
-void main2(void) {
-
-
-
-}

@@ -24,34 +24,34 @@ public:
 	cDate_t(const cDate_t& cDate);
 
 	// throws ILLEGAL_DATE_PARAMS
-	cDate_t(int day, int month, int year) throw(int);
+	cDate_t(const int& day, const int& month, const int& year) throw(int);
 	
 	// ~cDate_t(); no extra memory is allocated
 
 	const cDate_t& operator=(const cDate_t& cDate);
 
 	// throws ILLEGAL_INCREMENT_VALUE and OPERATION_BOUND_ERROR
-	const cDate_t& operator+=(int increment) throw(int);
+	const cDate_t& operator+=(const int& increment) throw(int);
 	
 	// throws ILLEGAL_DECREMENT_VALUE and OPERATION_BOUND_ERROR
-	const cDate_t& operator-=(int decrement) throw(int);
+	const cDate_t& operator-=(const int& decrement) throw(int);
 
 	// throws ILLEGAL_DATE_PARAMS
-	void setDate(int day, int month, int year) throw(int);
+	void setDate(const int& day, const int& month, const int& year) throw(int);
 
-	int getCurrentDay() const;
-	int getCurrentMonth() const;
-	int getCurrentYear() const;
-	int getDayOfYear() const;
+	const int& getDay() const;
+	const int& getMonth() const;
+	const int& getYear() const;
+	const int& getDayOfYear() const;
 
-	bool isLeapYear() const;
+	const bool& isLeapYear() const;
 
 	const char* getDayName() const;
 	const char* getMonthName() const; 
 
-	void printDate(PrintFormat format); // not const because we modify printFormat
-	void setPrintFormat(PrintFormat format);
-	PrintFormat getPrintFormat() const;
+	void printDate(const PrintFormat& format); // not const because we modify printFormat
+	void setPrintFormat(const PrintFormat& format);
+	const PrintFormat& getPrintFormat() const;
 
 private:
 	
