@@ -175,6 +175,10 @@
 				>
 			</File>
 			<File
+				RelativePath=".\common.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\cTime_t.cpp"
 				>
 			</File>
@@ -194,6 +198,10 @@
 			>
 			<File
 				RelativePath=".\cDate_t.h"
+				>
+			</File>
+			<File
+				RelativePath=".\common.h"
 				>
 			</File>
 			<File

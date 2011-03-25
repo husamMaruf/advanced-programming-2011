@@ -38,12 +38,6 @@ ostream& operator<<(ostream& os, const cTime_t& t) {
 	}
 }
 
-string pad(const int& num) {
-	ostringstream buffer;
-	buffer << ((num < 10) ? "0" : "") << num;
-	return buffer.str();
-}
-
 const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
 	int newSec = getSecond() + otherTime.getSecond();
 	int carry = (newSec >= 60) ? 1 : 0;
