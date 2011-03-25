@@ -2,7 +2,7 @@
 #include <time.h>
 #include <iostream>
 #include <string>
-#include <sstream>
+#include "common.h"
 
 using namespace std;
 
@@ -32,4 +32,3 @@ private:
 };
 
 ostream& operator<<(ostream& os, const cTime_t&);
-string pad(const int& num);

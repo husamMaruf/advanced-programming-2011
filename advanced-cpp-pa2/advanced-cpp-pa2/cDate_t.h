@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <time.h> 
+#include "common.h"
 
 using namespace std;
 

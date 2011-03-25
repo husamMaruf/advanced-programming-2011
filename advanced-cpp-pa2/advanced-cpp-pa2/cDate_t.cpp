@@ -157,20 +157,17 @@ const cDate_t::PrintFormat& cDate_t::getPrintFormat() const {
 }
 
 ostream& operator<<(ostream& os, const const cDate_t& cDate) {
-	bool padDay = (cDate.current_time.tm_mday < 10);
-	bool padMonth = (cDate.current_time.tm_mon+1 < 10);
-	
-	if (cDate.printFormat == cDate.Text) {
-		os << (padDay ? "0" : "") << cDate.current_time.tm_mday << '/';
+if (cDate.printFormat == cDate.Text) {
+		os << pad(cDate.current_time.tm_mday) << '/';
 		for (int i=0; i<3; i++) {
 			os << cDate.monthNames[cDate.current_time.tm_mon][i];
 		}
 	} else if (cDate.printFormat == cDate.European) {
-		os << (padDay ? "0" : "") << cDate.current_time.tm_mday << '/';
-		os << (padMonth ? "0" : "") << cDate.current_time.tm_mon+1;
+		os << pad(cDate.current_time.tm_mday) << '/';
+		os << pad(cDate.current_time.tm_mon+1);
 	} else { // cDate.printFormat == American
-		os << (padMonth ? "0" : "") << cDate.current_time.tm_mon+1 << '/';
-		os << (padDay ? "0" : "") << cDate.current_time.tm_mday;
+		os << pad(cDate.current_time.tm_mon+1) << '/';
+		os << pad(cDate.current_time.tm_mday);
 	}
 
 	os << '/' << cDate.current_time.tm_year+1900;
