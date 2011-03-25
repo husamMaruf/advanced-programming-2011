@@ -8,7 +8,7 @@ const cTimeDate_t& cTimeDate_t::add(const cTime_t& otherTime) {
 	return *this;
 }
 
-const cTimeDate_t& cTimeDate_t::operator+=(const cTime_t& otherTime) {
+const cTimeDate_t& cTimeDate_t::operator+=(const cTime_t& otherTime) throw(int) {
 	return add(otherTime);
 }
 

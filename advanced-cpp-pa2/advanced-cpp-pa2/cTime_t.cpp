@@ -49,7 +49,7 @@ const cTime_t& cTime_t::operator+=(const cTime_t& otherTime) {
 	return *this;
 }
 
-void cTime_t::setTime(const int& hour, const int& minutes, const int& seconds) {
+void cTime_t::setTime(const int& hour, const int& minutes, const int& seconds) throw(const char*) {
 	if (hour < 0 || hour >= 24 || minutes < 0 || minutes >= 60 || seconds < 0 || seconds >= 60) {
 		throw ("Illegal arguments");
 	}
@@ -58,7 +58,7 @@ void cTime_t::setTime(const int& hour, const int& minutes, const int& seconds) {
 	current_time.tm_sec = seconds;
 }
 
-void cTime_t::setFormat(const int& new_format) {
+void cTime_t::setFormat(const int& new_format) throw(const char*) {
 	if (new_format != 1 && new_format != 2) {
 		throw ("Illegal arguments");
 	}

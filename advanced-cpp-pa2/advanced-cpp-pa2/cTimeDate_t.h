@@ -7,7 +7,9 @@
 
 class cTimeDate_t:public cTime_t,public cDate_t {
 public:
-	virtual const cTimeDate_t& add(const cTime_t& otherTime);
+	//cTimeDate_t(); // Default CTOR that calls cTime_t and cDate_t default CTOR
+	//~cTimeDate_t(); // Default DTOR because we don't allocate memory on heap
+	virtual const cTimeDate_t& add(const cTime_t& otherTime) throw(int);
 	const cTimeDate_t& operator+=(const cTime_t&);
 };
 
