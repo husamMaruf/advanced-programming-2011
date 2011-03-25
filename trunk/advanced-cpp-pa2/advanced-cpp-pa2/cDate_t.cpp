@@ -17,10 +17,9 @@ const cDate_t::PrintFormat cDate_t::DEFAULT_PRINT_FORMAT = European;
 void cDate_t::defaultInit() {
 	time_t time_date = time(0);
 	current_time = *localtime(&time_date);
-	printFormat = DEFAULT_PRINT_FORMAT;
 }
 
-cDate_t::cDate_t() {
+cDate_t::cDate_t() : printFormat(DEFAULT_PRINT_FORMAT) {
 	defaultInit();
 } 
 
@@ -30,10 +29,9 @@ cDate_t::cDate_t(const cDate_t& cDate) {
 }
 
 // if passed parameters are illegal, default date object will be constructed (current date)
-cDate_t::cDate_t(int day, int month, int year) throw(int) {
+cDate_t::cDate_t(int day, int month, int year) throw(int) : printFormat(DEFAULT_PRINT_FORMAT) {
 
 	// this is needed so mktime (in setDate) will work properly
-	// also needed to set default PrintFormat
 	defaultInit();
 
 	setDate(day,month,year);
@@ -182,86 +180,6 @@ ostream& operator<<(ostream& os, const const cDate_t& cDate) {
 
 void main2(void) {
 
-	cDate_t date1;
-	cout << date1 << endl;
-	cDate_t date2(12,12,2001);
-	cout << date2 << endl;
-	date2.setDate(3,5,2013);
-	cout << date2 << endl;
-	cDate_t date3 = date2;
-	cout << date3 << endl;
-	date2.setDate(10,10,2000);
-	date1 = date3;
-	cout << date1 << endl;
-	date1.setDate(6,6,1976);	
-	date3.setDate(28,2,2000);
-	cout << date1 << endl;
-	cout << date3 << endl;
-	cDate_t date4(-3,4,2103);
-	cout << date4 << endl;
-	cout << date2.isLeapYear() << endl;
-	cout << date1.getCurrentDay() << endl;
-	cout << date2.getCurrentMonth() << endl;
-	cout << date3.getCurrentYear() << endl;
-	cDate_t date5(31,12,2000);
-	cout << date5.getDayOfYear() << endl;
-	cout << date5.getDayName() << endl;
-	cout << date3.getMonthName() << endl;
-
-	
-	try {
-		date5.setDate(-3,4,1000);
-	} catch (int ex) {
-		cout << "Caught exception " << ex << endl;
-	}
 
 
-	cDate_t date10(1,1,1970);
-	
-	try {
-		date10 += -1;
-	} catch (int ex) {
-		cout << "Caught exception " << ex << endl;
-	}
-
-	try {
-		date10 -= -1;
-	} catch (int ex) {
-		cout << "Caught exception " << ex << endl;
-	}
-
-	try {
-		date10 -= 1;
-	} catch (int ex) {
-		cout << "Caught exception " << ex << endl;
-	}
-
-	for (int i=0; i<100; i++) {
-		date10 += 10;
-		cout << date10 << endl;
-	}
-
-	for (int i=0; i<100; i++) {
-		date10 -= 5;
-		cout << date10 << endl;
-	}
-
-	date10.printDate(date10.American);
-	cout << '\n';
-	date10.printDate(date10.Text);
-	cout << '\n';
-	date10.printDate(date10.European);
-	cout << '\n';
-
-	cDate_t::PrintFormat printFormat = date10.getPrintFormat();
-
-	cout << printFormat << endl;
-
-	printFormat = date10.American;
-
-	date10.setPrintFormat(date10.Text);
-
-	cout << date10 << endl;
-
-	system("Pause");
 }
