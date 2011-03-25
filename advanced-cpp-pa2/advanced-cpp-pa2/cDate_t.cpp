@@ -180,7 +180,7 @@ ostream& operator<<(ostream& os, const const cDate_t& cDate) {
 	return os;
 }
 
-void main(void) {
+void main2(void) {
 
 	cDate_t date1;
 	cout << date1 << endl;
