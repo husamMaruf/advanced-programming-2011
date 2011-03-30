@@ -17,8 +17,8 @@ public:
 	int read(byte[] dst, const int& size) const { return currentPage; }
 	int write(byte[] src, const int& size);
 	void createPages(const int& amount);
-	const int& getDefaultPageSize() const { return defaultPageSize; }
-	void setDefaultPageSize(const int& pageSize);
+	const int& getDefaultPageSize() const { return memPage_t::defaultPageSize; }
+	void setDefaultPageSize(const int& pageSize) { memPage_t::defaultPageSize = pageSize; }
 private:
 	int capacity;
 	int actualSize;
@@ -28,5 +28,3 @@ private:
 	memPage_t* currentPage;
 	static int defaultPageSize;
 };
-
-memPool_t::defaultPageSize = 16;
