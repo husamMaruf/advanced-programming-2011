@@ -4,8 +4,6 @@
 class memPage_t {
 public:
 
-	static const int DEFAULT_PAGE_SIZE = 1024;
-
 	memPage_t();
 	memPage_t(const int& pageSize);
 
@@ -24,12 +22,17 @@ public:
 	template<class T> const int& write(const T& elem, const int& size);
 	
 private:
+	
+	friend class memPool_t;
+
+	static int defaultPageSize;
+
 	memPage_t(const memPage_t& page);
 	const memPage_t& operator=(const memPage_t& page);
 
 	memPage_t* next;
 
-	byte pageBuffer[DEFAULT_PAGE_SIZE]; // TODO change and define in CTOR
+	byte pageBuffer[1]; // TODO change and define in CTOR
 	int actualSize;
 	int currentPosition;
 	int pageSize;
