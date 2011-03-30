@@ -1,7 +1,5 @@
 #include "memPool_t.h"
 
-using namespace std;
-
 memPool_t::~memPool_t() {
 	for_each(pages.rbegin(), pages.rend(), &deleteMemPagePtr);
 }
