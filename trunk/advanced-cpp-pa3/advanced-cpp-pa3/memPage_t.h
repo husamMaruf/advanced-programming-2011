@@ -14,7 +14,7 @@ public:
 	const int& getPosition() const { return currentPosition; };
 	const bool& isEmpty() const { return actualSize == 0; };
 	const bool& isFull() const { return actualSize == pageSize; };
-	const int& getActualSize(){ return actualSize; };
+	const int& getActualSize() { return actualSize; };
 	const int& getPageCapacity() const { return pageSize; };
 	
 	const memPage_t* getPreviousPage() { return previous; }
