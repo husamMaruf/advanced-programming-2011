@@ -18,9 +18,9 @@ public:
 	const int& getActualSize() const { return actualSize; }
 	const int& getCapacity() const { return capacity; }
 	const int getNumOfPages() const { return pages.size(); }
-	const memPage_t* getFirstPage() const { return &(*pages.begin()); }
+	const memPage_t* getFirstPage() const { return *pages.begin(); }
 	const memPage_t* getLastPage() const;
-	const memPage_t* getCurrentPage() const { return &(*currentPageIter); }
+	const memPage_t* getCurrentPage() const { return *currentPageIter; }
 	template<class T> int read(T& elem, const int& size, const int& position) const ;	//ALON
 	template<class T> int write(const T& elem, const int& size, const int& position);	//DAN
 	void createPages(const int& amount);
@@ -33,8 +33,8 @@ private:
 
 	int capacity;
 	int actualSize;
-	list<memPage_t> pages;
-	list<memPage_t>::iterator currentPageIter;
+	list<memPage_t*> pages;
+	list<memPage_t*>::iterator currentPageIter;
 };
 
-void deleteMemPagePtr(memPage_t&  page);
+void deleteMemPagePtr(memPage_t*  page);
