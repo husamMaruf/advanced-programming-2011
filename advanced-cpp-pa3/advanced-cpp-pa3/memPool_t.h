@@ -12,10 +12,10 @@ public:
 	const int& getCapacity() const { return capacity; }
 	const int& getNumOfPages() const { return numOfPages; }
 	const memPage_t* getFirstPage() const { return firstPage; }
-	const memPage_t* getLastPage() const { return firstPage; }
-	const memPage_t* getCurrentPage() const { return lastPage; }
-	int read(byte[] dst, const int& size) const { return currentPage; }
-	int write(byte[] src, const int& size);
+	const memPage_t* getLastPage() const { return lastPage; }
+	const memPage_t* getCurrentPage() const { return currentPage; }
+	template<class T> int read(T& elem, const int& size, const int& position) const ;
+	template<class T> int write(const T& elem, const int& size, const int& position);
 	void createPages(const int& amount);
 	const int& getDefaultPageSize() const { return memPage_t::defaultPageSize; }
 	void setDefaultPageSize(const int& pageSize) { memPage_t::defaultPageSize = pageSize; }
