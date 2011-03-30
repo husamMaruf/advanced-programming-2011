@@ -14,9 +14,9 @@ public:
 	const int& getActualSize() const { return actualSize; }
 	const int& getCapacity() const { return capacity; }
 	const int& getNumOfPages() const { return pages.size(); }
-	const memPage_t* getFirstPage() const { return pages.begin(); }
-	const memPage_t* getLastPage() const { return *(pages.end()-1); }
-	const memPage_t* getCurrentPage() const { return *currentPageIter; }
+	const memPage_t* getFirstPage() const { return &(*pages.begin()); }
+	const memPage_t* getLastPage() const { return &(*(pages.end()-1)); }
+	const memPage_t* getCurrentPage() const { return &(*currentPageIter;) }
 	template<class T> int read(T& elem, const int& size, const int& position) const ;
 	template<class T> int write(const T& elem, const int& size, const int& position);
 	void createPages(const int& amount);
