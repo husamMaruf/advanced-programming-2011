@@ -1,7 +1,5 @@
 #pragma once
-
-//TODO: move to common
-typedef char byte;
+#include "common.h"
 
 class memPage_t {
 public:
