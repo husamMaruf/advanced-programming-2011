@@ -1,5 +1,6 @@
 #pragma once
 #include <list>
+#include <algorithm>
 #include "common.h"
 #include "memPage_t.h"
 
@@ -27,8 +28,12 @@ public:
 private:
 	memPool_t(const memPool_t& memPool);
 	const memPool_t& operator=(const memPool_t& memPool);
+
 	int capacity;
 	int actualSize;
 	list<memPage_t> pages;
 	list<memPage_t>::iterator currentPageIter;
 };
+
+
+void deleteMemPagePtr(memPage_t&  page);

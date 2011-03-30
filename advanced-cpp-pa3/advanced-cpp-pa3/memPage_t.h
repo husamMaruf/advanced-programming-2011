@@ -5,12 +5,15 @@
 class memPage_t {
 public:
 
+	static const int ILLEGAL_POSITION = 1;
+	static const int ILLEGAL_PAGE_SIZE = 2;
+
 	memPage_t();	//DAN
-	memPage_t(const int& pageSize);
+	memPage_t(const int& pageSize); // DAN
 
 	~memPage_t();	//DAN
 
-	void setPosition(const int& position);	//DAN
+	void setPosition(const int& position) throw(int);	//DAN
 	const int& getPosition() const { return currentPosition; };
 	const bool& isEmpty() const { return actualSize == 0; };
 	const bool& isFull() const { return actualSize == pageSize; };
@@ -37,9 +40,9 @@ private:
 	memPage_t* previous;
 	memPage_t* next;
 
-	byte pageBuffer[1]; // TODO change and define in CTOR
 	int actualSize;
 	int currentPosition;
 	int pageSize;
+	byte* pageBuffer;
 
 };
