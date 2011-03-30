@@ -20,6 +20,7 @@ public:
 	const int& getDefaultPageSize() const { return memPage_t::defaultPageSize; }
 	void setDefaultPageSize(const int& pageSize) { memPage_t::defaultPageSize = pageSize; }
 private:
+	memPool_t(const memPool_t& memPool);
 	int capacity;
 	int actualSize;
 	int numOfPages;
