@@ -1,6 +1,7 @@
 #pragma once
 #include "common.h"
 
+
 class memPage_t {
 public:
 

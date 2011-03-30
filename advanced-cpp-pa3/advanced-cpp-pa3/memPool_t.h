@@ -1,6 +1,9 @@
 #pragma once
+#include <list>
 #include "common.h"
 #include "memPage_t.h"
+
+using namespace std;
 
 class memPool_t {
 public:
@@ -28,4 +31,5 @@ private:
 	memPage_t* lastPage;
 	memPage_t* currentPage;
 	static int defaultPageSize;
+	list<memPage_t> pages;
 };
