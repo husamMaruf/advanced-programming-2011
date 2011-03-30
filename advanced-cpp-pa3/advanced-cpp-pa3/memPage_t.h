@@ -5,12 +5,12 @@
 class memPage_t {
 public:
 
-	memPage_t();
+	memPage_t();	//DAN
 	memPage_t(const int& pageSize);
 
-	~memPage_t();
+	~memPage_t();	//DAN
 
-	void setPosition(const int& position);
+	void setPosition(const int& position);	//DAN
 	const int& getPosition() const { return currentPosition; };
 	const bool& isEmpty() const { return actualSize == 0; };
 	const bool& isFull() const { return actualSize == pageSize; };
@@ -20,10 +20,10 @@ public:
 	const memPage_t* getPreviousPage() { return previous; }
 	const memPage_t* getNextPage() { return next; }
 
-	template<class T> const int& read(T& elem, const int& size, const int& position) const;
-	template<class T> const int& write(const T& elem, const int& size, const int& position);
-	template<class T> const int& read(T& elem, const int& size) const;
-	template<class T> const int& write(const T& elem, const int& size);
+	template<class T> const int& read(T& elem, const int& size, const int& position) const;	//DAN
+	template<class T> const int& write(const T& elem, const int& size, const int& position); //ALON
+	template<class T> const int& read(T& elem, const int& size) const;	//DAN
+	template<class T> const int& write(const T& elem, const int& size);	//ALON
 	
 private:
 	
