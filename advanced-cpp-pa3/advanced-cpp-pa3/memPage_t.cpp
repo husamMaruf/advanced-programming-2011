@@ -33,26 +33,4 @@ void memPage_t::setPosition(const int &position) throw(int) {
 }
 
 
-template<class T> const void memPage_t::read(T& elem, const int& size, const int& position) const throw(int) {
-	if (size < 1) {
-		throw ILLEGAL_READ_SIZE;
-	}
-	
-	if (position < 0 || position + size > actualSize) {
-		throw ILLEGAL_POSITION;
-	}
-	
-	memcpy(&elem, pageBuffer+position, size);
-}
 
-template<class T> const void memPage_t::write(const T& elem, const int& size, const int& position) throw(int) {
-	if (position < 0 || position > actualSize) {
-		throw ILLEGAL_POSITION;
-	}
-
-	if (position + size > pageSize) {
-		throw ILLEGAL_WRITE_SIZE;
-	}
-
-	memcpy(pageBuffer+position, &elem, size);
-}

@@ -25,7 +25,7 @@ public:
 	const memPage_t* getFirstPage() const { return *pages.begin(); }
 	const memPage_t* getLastPage() const;
 	const memPage_t* getCurrentPage() const { return *currentPageIter; }
-	template<class T> int read(T& elem, const int& size) const ;
+	template<class T> int read(T& elem, const int& size); // not const because currentPosition changes
 	template<class T> int write(const T& elem, const int& size);
 	void createPages(const int& amount) throw(int);
 	const int& getDefaultPageSize() const { return memPage_t::defaultPageSize; }
@@ -43,5 +43,60 @@ private:
 	list<memPage_t*> pages;
 	list<memPage_t*>::iterator currentPageIter;
 };
+
+template<class T> int memPool_t::read(T& elem, const int& size) {
+	if (actualSize < currentPosition + size || size < 1) {
+		return -1;
+	}
+
+	memPage_t* currentPage = (memPage_t*)getCurrentPage();
+	int bytesToRead = min(currentPage->getActualSize() - currentPage->getPosition(),size);
+	currentPage->read(elem,bytesToRead);
+	int readSize = bytesToRead;
+	while (readSize < size) {
+		currentPageIter++;
+		currentPage = (memPage_t*)getCurrentPage();
+		bytesToRead = min(currentPage->actualSize, size - readSize);
+		currentPage->read(*(&elem + readSize),bytesToRead,0);
+		readSize += bytesToRead;
+	}
+	
+	if (currentPage->getPosition() == currentPage->getPageCapacity()) {
+		currentPageIter++;
+	}
+	currentPosition += readSize;
+	return readSize;
+}
+
+template<class T> int memPool_t::write(const T& elem, const int& size) {
+	if (getNumOfPages() == 0) {
+		createPages(1);
+	}
+	
+	memPage_t* currentPage = (memPage_t*)getCurrentPage();
+	int position = currentPage->getPosition();
+
+	int freeSpaceInCurrentPage = currentPage->getPageCapacity() - currentPage->getActualSize();
+	int writtenSize = 0;
+	while (writtenSize < size) {
+		int bytesToWriteInCurrentPage = min(freeSpaceInCurrentPage, size-writtenSize);
+		currentPage->write(*(&elem + writtenSize), bytesToWriteInCurrentPage, position);
+		writtenSize += bytesToWriteInCurrentPage;
+		if (writtenSize < size) {
+			currentPageIter++;
+			if (currentPageIter == pages.end()) {
+				createPages(1);
+				currentPageIter = (pages.end())--;
+			}
+			currentPage = (memPage_t*)getCurrentPage();
+			freeSpaceInCurrentPage = currentPage->getPageCapacity();
+			position = 0;
+		}
+	}
+
+	currentPosition += writtenSize;
+	actualSize = max(actualSize, currentPosition);
+	return writtenSize;
+}
 
 void deleteMemPagePtr(memPage_t*  page);
