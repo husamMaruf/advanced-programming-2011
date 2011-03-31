@@ -25,11 +25,28 @@ memPage_t::~memPage_t() {
 int memPage_t::defaultPageSize = 1024;
 
 void memPage_t::setPosition(const int &position) throw(int) {
-	if (position > actualSize) {
+	if (position < 0 || position > actualSize) {
 		throw ILLEGAL_POSITION;
 	}
 
 	currentPosition = position;
+}
+
+
+template<class T> const void memPage_t::read(T& elem, const int& size, const int& position) const throw(int) {
+	if (size < 1) {
+		throw ILLEGAL_READ_SIZE;
+	}
+	
+	if (position < 0 || position + size > actualSize) {
+		throw ILLEGAL_POSITION;
+	}
+	
+	memcpy(&elem, pageBuffer+position, size);
+}
+
+template<class T> const void memPage_t::read(T& elem, const int& size) {
+	read(elem,size,currentPosition);
 }
 
 int main(void) {
