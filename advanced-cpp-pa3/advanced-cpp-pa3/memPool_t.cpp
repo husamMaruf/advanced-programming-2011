@@ -36,6 +36,30 @@ void memPool_t::createPages(const int& amount) throw(int) {
 	capacity += amount * getDefaultPageSize();
 }
 
+template<class T> int memPool_t::read(T& elem, const int& size) const {
+	if (actualSize < currentPosition + size || size < 1) {
+		return -1;
+	}
+
+	memPage_t* currentPage = getCurrentPage();
+	int bytesToRead = min(currentPage->getActualSize() - currentPage->getPosition(),size);
+	currentPage->read(elem,bytesToRead);
+	int readSize = bytesToRead;
+	while (readSize < size) {
+		currentPageIter++;
+		currentPage = getCurrentPage();
+		bytesToRead = min(currentPage->actualSize, size - readSize);
+		currentPage->read(*(&elem + readSize),bytesToRead,0);
+		readSize += bytesToRead;
+	}
+	
+	if (currentPage->getPosition() == currentPage->getPageCapacity()) {
+		currentPageIter++;
+	}
+	currentPosition += readSize;
+	return readSize;
+}
+
 template<class T> int memPool_t::write(const T& elem, const int& size) {
 	if (getNumOfPages() == 0) {
 		createPages(1);
@@ -62,8 +86,9 @@ template<class T> int memPool_t::write(const T& elem, const int& size) {
 		}
 	}
 
-	currentPosition += size;
+	currentPosition += writtenSize;
 	actualSize = max(actualSize, currentPosition);
+	return writtenSize;
 }
 
 void memPool_t::setCurrentPosition(const int& position) throw(int) {

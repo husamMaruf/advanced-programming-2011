@@ -25,7 +25,7 @@ public:
 	const memPage_t* getFirstPage() const { return *pages.begin(); }
 	const memPage_t* getLastPage() const;
 	const memPage_t* getCurrentPage() const { return *currentPageIter; }
-	template<class T> int read(T& elem, const int& size) const ;	//ALON
+	template<class T> int read(T& elem, const int& size) const ;
 	template<class T> int write(const T& elem, const int& size);
 	void createPages(const int& amount) throw(int);
 	const int& getDefaultPageSize() const { return memPage_t::defaultPageSize; }

@@ -9,6 +9,7 @@ public:
 	static const int ILLEGAL_POSITION = 1;
 	static const int ILLEGAL_PAGE_SIZE = 2;
 	static const int ILLEGAL_READ_SIZE = 3;
+	static const int ILLEGAL_WRITE_SIZE = 4;
 
 	memPage_t() throw(int);
 	memPage_t(const int& pageSize) throw(int);
@@ -25,9 +26,9 @@ public:
 	const memPage_t* getNextPage() { return next; }
 
 	template<class T> const void read(T& elem, const int& size, const int& position) const throw (int);
-	template<class T> const void write(const T& elem, const int& size, const int& position) throw(int); //ALON
-	template<class T> const void read(T& elem, const int& size) throw(int);
-	template<class T> const void write(const T& elem, const int& size) throw(int);	//ALON
+	template<class T> const void write(const T& elem, const int& size, const int& position) throw(int);
+	template<class T> const void read(T& elem, const int& size) throw(int) { read(elem,size,currentPosition); }
+	template<class T> const void write(const T& elem, const int& size) throw(int) { write(elem,size,currentPosition); }
 	
 private:
 	
