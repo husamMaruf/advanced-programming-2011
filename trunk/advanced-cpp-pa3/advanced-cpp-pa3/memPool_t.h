@@ -14,8 +14,8 @@ public:
 	static const int ILLEGAL_POSITION = 1;
 	static const int ILLEGAL_NUMBER_OF_PAGES = 2;
 	
-	memPool_t() throw(int) :actualSize(0),capacity(0) { createPages(DEFAULT_INIT_PAGES); }
-	memPool_t(const int& numOfEmptyPages) throw(int) :actualSize(0),capacity(0) { createPages(numOfEmptyPages); }
+	memPool_t() throw(int) :actualSize(0),capacity(0), currentPosition(0) { createPages(DEFAULT_INIT_PAGES); }
+	memPool_t(const int& numOfEmptyPages) throw(int) :actualSize(0),capacity(0), currentPosition(0) { createPages(numOfEmptyPages); }
 	~memPool_t();
 
 	bool isEmpty() const { return actualSize == 0; }
