@@ -24,7 +24,8 @@ public:
 	const memPage_t* getPreviousPage() { return previous; }
 	const memPage_t* getNextPage() { return next; }
 
-	template<class T> const void read(T& elem, const int& size, const int& position) const throw (int);
+	// these are not const corrected because they modify currentPosition
+	template<class T> const void read(T& elem, const int& size, const int& position) throw (int);
 	template<class T> const void write(const T& elem, const int& size, const int& position) throw(int);
 	template<class T> const void read(T& elem, const int& size) throw(int) { read(elem,size,currentPosition); }
 	template<class T> const void write(const T& elem, const int& size) throw(int) { write(elem,size,currentPosition); }
@@ -48,7 +49,7 @@ private:
 
 };
 
-template<class T> const void memPage_t::read(T& elem, const int& size, const int& position) const throw(int) {
+template<class T> const void memPage_t::read(T& elem, const int& size, const int& position) throw(int) {
 	if (size < 1) {
 		throw ILLEGAL_READ_SIZE;
 	}
@@ -58,6 +59,8 @@ template<class T> const void memPage_t::read(T& elem, const int& size, const int
 	}
 	
 	memcpy(&elem, pageBuffer+position, size);
+
+	setPosition(position+size);
 }
 
 template<class T> const void memPage_t::write(const T& elem, const int& size, const int& position) throw(int) {
@@ -70,4 +73,10 @@ template<class T> const void memPage_t::write(const T& elem, const int& size, co
 	}
 
 	memcpy(pageBuffer+position, &elem, size);
+	
+	int newPosition = position + size;
+
+	actualSize = max(actualSize, newPosition);
+	setPosition(newPosition);
+	
 }
