@@ -178,6 +178,10 @@
 				RelativePath=".\memPool_t.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\test.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
