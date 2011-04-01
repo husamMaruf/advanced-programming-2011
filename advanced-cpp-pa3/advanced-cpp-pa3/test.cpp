@@ -1,5 +1,3 @@
-#include "common.h"
-#include "memPage_t.h"
 #include "memPool_t.h"
 #include <vector>
 #include <algorithm>
@@ -102,20 +100,32 @@ void test1() {
 
 					switch(entry->type) {
 						case INT:
-							pool.read(intType,size);
-							cout << "Read: " << intType << endl;
+							if (pool.read(intType,size) == -1) {
+								cout << "Illegal read" << endl;
+							} else {
+								cout << "Read: " << intType << endl;
+							}
 							break;
 						case DOUBLE:
-							pool.read(doubleType, size);
-							cout << "Read: " << doubleType << endl;
+							if (pool.read(doubleType,size) == -1) {
+								cout << "Illegal read" << endl;
+							} else {
+								cout << "Read: " << doubleType << endl;
+							}
 							break;
 						case CHAR:
-							pool.read(charType, size);
-							cout << "Read: " << charType << endl;
+							if (pool.read(charType,size) == -1) {
+								cout << "Illegal read" << endl;
+							} else {
+								cout << "Read: " << charType << endl;
+							}
 							break;
 						case DATA_CONTAINER:
-							pool.read(containerType, size);
-							cout << "Read: DataContainer(" << containerType.getId() << "," << containerType.getChar() << ")" << endl;
+							if (pool.read(containerType,size) == -1) {
+								cout << "Illegal read" << endl;
+							} else {
+								cout << "Read: DataContainer(" << containerType.getId() << "," << containerType.getChar() << ")" << endl;
+							}
 							break;
 					}
 

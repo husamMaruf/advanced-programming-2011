@@ -32,44 +32,43 @@ public:
 	const int& getCurrentPosition() const { return currentPosition; }
 	void setCurrentPosition(const int& position) throw(int);
 
-	static const int& getDefaultPageSize() { return memPage_t::defaultPageSize; }
-	static void setDefaultPageSize(const int& pageSize) { memPage_t::defaultPageSize = pageSize; }
+	static const int& getDefaultPageSize() { return memPool_t::defaultPageSize; }
+	static void setDefaultPageSize(const int& pageSize) { memPool_t::defaultPageSize = pageSize; }
 
 private:
 	memPool_t(const memPool_t& memPool);
 	const memPool_t& operator=(const memPool_t& memPool);
+
+	static int defaultPageSize;
 
 	int capacity;
 	int actualSize;
 	int currentPosition;
 	list<memPage_t*> pages;
 	list<memPage_t*>::iterator currentPageIter;
-
 };
 
 template<class T> int memPool_t::read(T& elem, const int& size) {
-
 	if (actualSize < currentPosition + size || size < 1) {
-		return -1;
+		return (size == 0) ? 0 : -1;
 	}
 
-	memPage_t* currentPage = (memPage_t*)getCurrentPage();
+	memPage_t* currentPage = *currentPageIter;
+	int bytesToRead = min(currentPage->getActualSize() - currentPage->getPosition(),size);
+	int readSize = currentPage->read(elem,bytesToRead);
+	while (readSize < size) {
+		currentPageIter++;
+		currentPage = *currentPageIter;
+		bytesToRead = min(currentPage->getActualSize(), size - readSize);
+		readSize += currentPage->read(*((byte*)(&elem) + readSize),bytesToRead,0);
+	}
 
 	if (currentPage->getPosition() == currentPage->getPageCapacity()) {
 		currentPageIter++;
-		currentPage = (memPage_t*)getCurrentPage();
-		currentPage->setPosition(0);
-	}
-
-	int bytesToRead = min(currentPage->getActualSize() - currentPage->getPosition(),size);
-	currentPage->read(elem,bytesToRead);
-	int readSize = bytesToRead;
-	while (readSize < size) {
-		currentPageIter++;
-		currentPage = (memPage_t*)getCurrentPage();
-		bytesToRead = min(currentPage->actualSize, size - readSize);
-		currentPage->read(*((byte*)(&elem) + readSize),bytesToRead,0);
-		readSize += bytesToRead;
+		if (currentPageIter != pages.end()) {
+			currentPage = *currentPageIter;
+			currentPage->setPosition(0);
+		}
 	}
 
 	currentPosition += readSize;
@@ -77,44 +76,31 @@ template<class T> int memPool_t::read(T& elem, const int& size) {
 }
 
 template<class T> int memPool_t::write(const T& elem, const int& size) {
-
 	if (size < 1) {
-		return -1;
+		return (size == 0) ? 0 : -1;
 	}
 
-	if (getNumOfPages() == 0) {
+	if (getNumOfPages() == 0 || currentPageIter == pages.end()) {
 		createPages(1);
-	}
-	
-	memPage_t* currentPage = (memPage_t*)getCurrentPage();
-	int position = currentPage->getPosition();
-
-	if (position == currentPage->getPageCapacity()) {
-		currentPageIter++;
-		if (currentPageIter == pages.end()) {
-			createPages(1);
-			currentPageIter = --(pages.end());
-		}
-		currentPage = (memPage_t*)getCurrentPage();
-		position = 0;
+		currentPageIter = --(pages.end());
 	}
 
-	int freeSpaceInCurrentPage = currentPage->getPageCapacity() - currentPage->getActualSize();
-
-	int writtenSize = 0;
+	memPage_t* currentPage = *currentPageIter;
+	int bytesToWrite = min(currentPage->getPageCapacity() - currentPage->getPosition(),size);
+	int writtenSize = currentPage->write(elem,bytesToWrite);
 	while (writtenSize < size) {
-		int bytesToWriteInCurrentPage = min(freeSpaceInCurrentPage, size-writtenSize);
-		currentPage->write(*((byte*)(&elem) + writtenSize), bytesToWriteInCurrentPage, position);
-		writtenSize += bytesToWriteInCurrentPage;
-		if (writtenSize < size) {
-			currentPageIter++;
-			if (currentPageIter == pages.end()) {
-				createPages(1);
-				currentPageIter = --(pages.end());
-			}
-			currentPage = (memPage_t*)getCurrentPage();
-			freeSpaceInCurrentPage = currentPage->getPageCapacity();
-			position = 0;
+		createPages(1);
+		currentPageIter++;
+		currentPage = *currentPageIter;
+		bytesToWrite = min(currentPage->getPageCapacity(), size - writtenSize);
+		writtenSize += currentPage->write(*((byte*)(&elem) + writtenSize), bytesToWrite, 0);
+	}
+
+	if (currentPage->getPosition() == currentPage->getPageCapacity()) {
+		currentPageIter++;
+		if (currentPageIter != pages.end()) {
+			currentPage = *currentPageIter;
+			currentPage->setPosition(0);
 		}
 	}
 
