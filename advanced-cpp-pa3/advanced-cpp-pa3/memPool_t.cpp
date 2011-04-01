@@ -46,14 +46,16 @@ void memPool_t::setCurrentPosition(const int& position) throw(int) {
 	list<memPage_t*>::iterator iter = pages.begin();
 	memPage_t* currentPage;
 	int currentPosition = 0;
-	for (currentPage = *iter; iter != pages.end(); currentPage = *iter++) {
+	for (currentPage = *iter; iter != pages.end(); currentPage = *iter) {
 		if (currentPosition <= position && currentPosition + currentPage->getPageCapacity() >= position) {
 			break;
 		}
 		currentPosition += currentPage->getPageCapacity();
+		iter++;
 	}
 
 	currentPageIter = iter;
 	currentPage->setPosition(position-currentPosition);
+	currentPosition = position;
 
 }

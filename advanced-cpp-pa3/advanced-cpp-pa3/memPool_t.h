@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "common.h"
 #include "memPage_t.h"
+#include <iostream>
 
 using namespace std;
 
@@ -43,9 +44,26 @@ private:
 	int currentPosition;
 	list<memPage_t*> pages;
 	list<memPage_t*>::iterator currentPageIter;
+
+	void dumpPool(int startPosition, int endPosition) {
+		int counter = 0;
+		int currentPosition = startPosition;
+		while(currentPosition <= endPosition) {
+			setCurrentPosition(currentPosition);
+			memPage_t* page = (memPage_t*)getCurrentPage();
+			cout << (int)page->pageBuffer[page->currentPosition] << ' ';
+			counter += 1;
+			currentPosition += 1;
+			if (counter % 20 == 0) {
+				cout << '\n';
+			}
+		}
+	}
+
 };
 
 template<class T> int memPool_t::read(T& elem, const int& size) {
+
 	if (actualSize < currentPosition + size || size < 1) {
 		return -1;
 	}
@@ -54,6 +72,8 @@ template<class T> int memPool_t::read(T& elem, const int& size) {
 
 	if (currentPage->getPosition() == currentPage->getPageCapacity()) {
 		currentPageIter++;
+		currentPage = (memPage_t*)getCurrentPage();
+		currentPage->setPosition(0);
 	}
 
 	int bytesToRead = min(currentPage->getActualSize() - currentPage->getPosition(),size);
@@ -63,7 +83,7 @@ template<class T> int memPool_t::read(T& elem, const int& size) {
 		currentPageIter++;
 		currentPage = (memPage_t*)getCurrentPage();
 		bytesToRead = min(currentPage->actualSize, size - readSize);
-		currentPage->read(*(&elem + readSize),bytesToRead,0);
+		currentPage->read(*((byte*)(&elem) + readSize),bytesToRead,0);
 		readSize += bytesToRead;
 	}
 
@@ -99,7 +119,7 @@ template<class T> int memPool_t::write(const T& elem, const int& size) {
 	int writtenSize = 0;
 	while (writtenSize < size) {
 		int bytesToWriteInCurrentPage = min(freeSpaceInCurrentPage, size-writtenSize);
-		currentPage->write(*(&elem + writtenSize), bytesToWriteInCurrentPage, position);
+		currentPage->write(*((byte*)(&elem) + writtenSize), bytesToWriteInCurrentPage, position);
 		writtenSize += bytesToWriteInCurrentPage;
 		if (writtenSize < size) {
 			currentPageIter++;
