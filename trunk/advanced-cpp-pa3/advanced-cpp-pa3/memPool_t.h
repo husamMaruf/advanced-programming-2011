@@ -89,12 +89,11 @@ template<class T> int memPool_t::write(const T& elem, const int& size) {
 	int bytesToWrite = min(currentPage->getPageCapacity() - currentPage->getPosition(),size);
 	int writtenSize = currentPage->write(elem,bytesToWrite);
 	while (writtenSize < size) {
+		currentPageIter++;
 		if (currentPageIter == pages.end()) {
 			createPages(1);
 			currentPageIter = --(pages.end());
-		} else {
-			currentPageIter++;
-		}
+		} 
 		currentPage = *currentPageIter;
 		bytesToWrite = min(currentPage->getPageCapacity(), size - writtenSize);
 		writtenSize += currentPage->write(*((byte*)(&elem) + writtenSize), bytesToWrite, 0);
