@@ -45,21 +45,6 @@ private:
 	list<memPage_t*> pages;
 	list<memPage_t*>::iterator currentPageIter;
 
-	void dumpPool(int startPosition, int endPosition) {
-		int counter = 0;
-		int currentPosition = startPosition;
-		while(currentPosition <= endPosition) {
-			setCurrentPosition(currentPosition);
-			memPage_t* page = (memPage_t*)getCurrentPage();
-			cout << (int)page->pageBuffer[page->currentPosition] << ' ';
-			counter += 1;
-			currentPosition += 1;
-			if (counter % 20 == 0) {
-				cout << '\n';
-			}
-		}
-	}
-
 };
 
 template<class T> int memPool_t::read(T& elem, const int& size) {
