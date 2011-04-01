@@ -80,3 +80,4 @@ template<class T> const void memPage_t::write(const T& elem, const int& size, co
 	setPosition(newPosition);
 	
 }
+

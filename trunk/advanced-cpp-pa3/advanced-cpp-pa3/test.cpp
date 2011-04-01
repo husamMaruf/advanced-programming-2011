@@ -90,7 +90,7 @@ void test1() {
 				cout << "choose entry number (in list)" << endl;
 				cin >> n;
 				try {
-					if (n < 0 || n > entries.size()) {
+					if (n < 0 || n > entries.size()-1) {
 						cout << "n is too big or too small" << endl;
 						continue;
 					}
@@ -310,16 +310,16 @@ int main(int argc, char *argv[]) {
 	cin >> choice;
 
 	switch(choice) {
-			case '1':
-				test1();
-				break;
-			case '2':
-				test2();
-				break;
-			default:
-				cout << "Bad choice, better luck next time" << endl;
-				break;
-		}
+		case '1':
+			test1();
+			break;
+		case '2':
+			test2();
+			break;
+		default:
+			cout << "Bad choice, better luck next time" << endl;
+			break;
+	}
 
 	system("PAUSE");
 }
