@@ -68,7 +68,7 @@ template<class T> const void memPage_t::write(const T& elem, const int& size, co
 		throw ILLEGAL_POSITION;
 	}
 
-	if (position + size > pageSize) {
+	if (size < 1 || position + size > pageSize) {
 		throw ILLEGAL_WRITE_SIZE;
 	}
 
