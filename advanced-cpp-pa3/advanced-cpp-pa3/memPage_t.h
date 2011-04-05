@@ -22,18 +22,18 @@ public:
 	// throws ILLEGAL_POSITION
 	void setPosition(int position) throw(int);
 
-	const int getPosition() const { return currentPosition; };
-	const bool isEmpty() const { return actualSize == 0; };
-	const bool isFull() const { return actualSize == pageSize; };
-	const int getActualSize() { return actualSize; };
-	const int getPageCapacity() const { return pageSize; };
+	int getPosition() const { return currentPosition; };
+	bool isEmpty() const { return actualSize == 0; };
+	bool isFull() const { return actualSize == pageSize; };
+	int getActualSize() const { return actualSize; };
+	int getPageCapacity() const { return pageSize; };
 	
 	// these are not const corrected because they modify currentPosition
 	// throws : ILLEGAL_POSITION, ILLEGAL_READ_SIZE (for read), ILLEGAL_WRITE_SIZE (for write)
-	template<class T> const int read(T& elem, int size, int position) throw (int);
-	template<class T> const int write(const T& elem, int size, int position) throw(int);
-	template<class T> const int read(T& elem, int size) throw(int) { return read(elem,size,currentPosition); }
-	template<class T> const int write(const T& elem, int size) throw(int) { return write(elem,size,currentPosition); }
+	template<class T> int read(T& elem, int size, int position) throw (int);
+	template<class T> int write(const T& elem, int size, int position) throw(int);
+	template<class T> int read(T& elem, int size) throw(int) { return read(elem,size,currentPosition); }
+	template<class T> int write(const T& elem, int size) throw(int) { return write(elem,size,currentPosition); }
 	
 private:
 	
@@ -48,7 +48,7 @@ private:
 	byte* pageBuffer;
 };
 
-template<class T> const int memPage_t::read(T& elem, int size, int position) throw(int) {
+template<class T> int memPage_t::read(T& elem, int size, int position) throw(int) {
 	if (size == 0) {
 		return 0;
 	}
@@ -64,7 +64,7 @@ template<class T> const int memPage_t::read(T& elem, int size, int position) thr
 	return size;
 }
 
-template<class T> const int memPage_t::write(const T& elem, int size, int position) throw(int) {
+template<class T> int memPage_t::write(const T& elem, int size, int position) throw(int) {
 	if (size == 0) {
 		return 0;
 	}
