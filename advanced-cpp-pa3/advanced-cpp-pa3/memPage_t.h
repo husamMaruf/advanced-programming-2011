@@ -13,24 +13,27 @@ public:
 	static const int ILLEGAL_WRITE_SIZE = 4;
 
 	memPage_t() throw(int);
-	memPage_t(const int& pageSize) throw(int);
+
+	// throws ILLEGAL_PAGE_SIZE
+	memPage_t(int _pageSize) throw(int);
+	
 	~memPage_t();
 
-	void setPosition(const int& position) throw(int);
-	const int& getPosition() const { return currentPosition; };
+	// throws ILLEGAL_POSITION
+	void setPosition(int position) throw(int);
+
+	const int getPosition() const { return currentPosition; };
 	const bool isEmpty() const { return actualSize == 0; };
 	const bool isFull() const { return actualSize == pageSize; };
-	const int& getActualSize() { return actualSize; };
-	const int& getPageCapacity() const { return pageSize; };
+	const int getActualSize() { return actualSize; };
+	const int getPageCapacity() const { return pageSize; };
 	
-	const memPage_t* getPreviousPage() { return previous; }
-	const memPage_t* getNextPage() { return next; }
-
 	// these are not const corrected because they modify currentPosition
-	template<class T> const int read(T& elem, const int& size, const int& position) throw (int);
-	template<class T> const int write(const T& elem, const int& size, const int& position) throw(int);
-	template<class T> const int read(T& elem, const int& size) throw(int) { return read(elem,size,currentPosition); }
-	template<class T> const int write(const T& elem, const int& size) throw(int) { return write(elem,size,currentPosition); }
+	// throws : ILLEGAL_POSITION, ILLEGAL_READ_SIZE (for read), ILLEGAL_WRITE_SIZE (for write)
+	template<class T> const int read(T& elem, int size, int position) throw (int);
+	template<class T> const int write(const T& elem, int size, int position) throw(int);
+	template<class T> const int read(T& elem, int size) throw(int) { return read(elem,size,currentPosition); }
+	template<class T> const int write(const T& elem, int size) throw(int) { return write(elem,size,currentPosition); }
 	
 private:
 	
@@ -39,16 +42,13 @@ private:
 	memPage_t(const memPage_t& page);
 	const memPage_t& operator=(const memPage_t& page);
 
-	memPage_t* previous;
-	memPage_t* next;
-
 	int actualSize;
 	int currentPosition;
 	int pageSize;
 	byte* pageBuffer;
 };
 
-template<class T> const int memPage_t::read(T& elem, const int& size, const int& position) throw(int) {
+template<class T> const int memPage_t::read(T& elem, int size, int position) throw(int) {
 	if (size == 0) {
 		return 0;
 	}
@@ -64,7 +64,7 @@ template<class T> const int memPage_t::read(T& elem, const int& size, const int&
 	return size;
 }
 
-template<class T> const int memPage_t::write(const T& elem, const int& size, const int& position) throw(int) {
+template<class T> const int memPage_t::write(const T& elem, int size, int position) throw(int) {
 	if (size == 0) {
 		return 0;
 	}

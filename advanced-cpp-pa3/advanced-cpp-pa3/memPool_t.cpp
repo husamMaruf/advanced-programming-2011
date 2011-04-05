@@ -1,11 +1,7 @@
 #include "memPool_t.h"
 
 memPool_t::~memPool_t() {
-	for_each(pages.rbegin(), pages.rend(), &deleteMemPagePtr);
-}
-
-void deleteMemPagePtr(memPage_t* page) {
-	delete page;
+	pages.clear(); // destructors and memory deallocation of mem_pages
 }
 
 int memPool_t::defaultPageSize = 32;
@@ -16,18 +12,21 @@ const memPage_t* memPool_t::getLastPage() const {
 	return *result;
 }
 
-void memPool_t::createPages(const int& amount) throw(int) {
+void memPool_t::setDefaultPageSize(int pageSize) { 
+	if (pageSize < 1) {
+		throw ILLEGAL_PAGE_SIZE;
+	}	
+
+	defaultPageSize = pageSize; 
+}
+
+void memPool_t::createPages(int amount) throw(int) {
 	if (amount < 1) {
 		throw ILLEGAL_NUMBER_OF_PAGES;
 	}
 
 	for (int i=0; i<amount; i++) {
 		memPage_t* newPage = new memPage_t(getDefaultPageSize());
-		if (getNumOfPages() > 0) {
-			memPage_t* lastPage = (memPage_t*)getLastPage();
-			lastPage->next = newPage;
-			newPage->previous = lastPage;
-		}
 		pages.push_back(newPage);
 		if (getNumOfPages() == 1) {
 			currentPageIter = pages.begin();
@@ -37,7 +36,7 @@ void memPool_t::createPages(const int& amount) throw(int) {
 	capacity += amount * getDefaultPageSize();
 }
 
-void memPool_t::setCurrentPosition(const int& position) throw(int) {
+void memPool_t::setCurrentPosition(int position) throw(int) {
 	if (position < 0 || position > actualSize) {
 		throw ILLEGAL_POSITION;
 	}
