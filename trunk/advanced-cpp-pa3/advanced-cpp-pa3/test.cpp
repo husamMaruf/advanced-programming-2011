@@ -46,6 +46,9 @@ void handleException(const int& e) {
 		case memPool_t::ILLEGAL_POSITION:
 			cout << "ILLGAL POSITION" << endl;
 			break;
+		case memPool_t::ILLEGAL_PAGE_SIZE:
+			cout << "ILLEGAL PAGE SIZE" << endl;
+			break;
 	}
 }
 
