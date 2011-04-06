@@ -1,7 +1,12 @@
 #include "memPool_t.h"
 
 memPool_t::~memPool_t() {
-	pages.clear(); // destructors and memory deallocation of mem_pages
+	list<memPage_t*>::iterator it = pages.begin();
+	while(it != pages.end()) {
+		delete *it;
+		it++;
+	}
+	pages.clear(); 
 }
 
 int memPool_t::defaultPageSize = 32;
