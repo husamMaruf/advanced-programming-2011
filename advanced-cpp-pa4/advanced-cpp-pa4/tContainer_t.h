@@ -4,7 +4,7 @@
 
 using namespace std;
 
-template <class T,class container<T*>>
+template <class T,class Container>
 class tContainer_t {
 public:
 	tContainer_t();
@@ -20,7 +20,7 @@ public:
 	void append(const T* element);
 	T* getFirst() const;
 	T* getLast() const;
-	T* find(T element) const;
+	T* find(const T& element) const;
 	bool remove(const T& element);
 	void removeAll();
 };
