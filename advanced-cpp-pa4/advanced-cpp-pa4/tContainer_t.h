@@ -35,7 +35,7 @@ private:
 ostream& operator<<(ostream& os, const tContainer_t<T,Container>&);
 
 bool tContainer_t::remove(const T& element) {
-	for (iter_t iter = c.begin(); iter != c.end(); c++) {
+	for (iter_t iter = c.begin(); iter != c.end(); iter++) {
 		if (**iter == element) {
 			c.erase(iter);
 			return true;
