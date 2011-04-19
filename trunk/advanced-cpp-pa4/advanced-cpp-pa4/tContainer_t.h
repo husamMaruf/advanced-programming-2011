@@ -8,12 +8,12 @@ template <class T,class Container>
 class tContainer_t {
 public:
 	tContainer_t();
-	tContainer_t(const tContainer_t& tContainer);
+	tContainer_t(const tContainer_t<T,Container>& tContainer);
 	~tContainer_t();
 
-	const tContainer_t& operator=(const tContainer_t& tContainer);
+	const tContainer_t& operator=(const tContainer_t<T,Container>& tContainer);
 	T* operator[](unsigned index) const; // retrieve[]
-	const tContainer_t& operator+=(const tContainer_t& tContainer);
+	const tContainer_t& operator+=(const tContainer_t<T,Container>& tContainer);
 
 	bool isEmpty() const;
 	int size() const;
@@ -25,7 +25,7 @@ public:
 	void removeAll();
 };
 
-ostream& operator<<(ostream& os, const tContainer_t&); //not needed but may be good for testing
+ostream& operator<<(ostream& os, const tContainer_t<T,Container>&); //not needed but may be good for testing
 
 
 
