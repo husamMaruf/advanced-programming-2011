@@ -1,36 +1,36 @@
 #pragma once
 #include <algorithm> 
 #include <string>
-#include <queue>
 
 using namespace std;
 
 template <class T,class Container>
 class tContainer_t {
 public:
-	tContainer_t();
-	tContainer_t(const tContainer_t<T,Container>& tContainer);
-	~tContainer_t();
+	tContainer_t();	//TODO Alon
+	tContainer_t(const tContainer_t<T,Container>& tContainer); //TODO Dan
+	~tContainer_t(); //TODO Dan
 
-	const tContainer_t& operator=(const tContainer_t<T,Container>& tContainer);
-	T* operator[](unsigned index) const; // retrieve[]
-	const tContainer_t& operator+=(const tContainer_t<T,Container>& tContainer);
+	const tContainer_t& operator=(const tContainer_t<T,Container>& tContainer); //TODO Alon
+	T* operator[](unsigned index) const; // retrieve[] //TODO Dan
+	const tContainer_t& operator+=(const tContainer_t<T,Container>& tContainer); //TODO Alon
 
-	bool isEmpty() const;
-	int size() const;
-	void append(const T* element);
-	T* getFirst() const;
-	T* getLast() const;
-	T* find(const T& element) const;
-	bool remove(const T& element);
-	void removeAll();
+	bool isEmpty() const; //TODO Alon
+	int size() const;	//TODO Dan
+	void append(const T* element); //TODO Alon
+	T* getFirst() const; //TODO Dan
+	T* getLast() const; //TODO Dan
+	T* find(const T& element) const; //TODO Dan
+	bool remove(const T& element); //TODO Alon
+	void removeAll(); //TODO Alon
 
 	typedef typename Container::iterator iter_t;
+
 private:
 	Container c;
 };
 
-ostream& operator<<(ostream& os, const tContainer_t<T,Container>&); //not needed but may be good for testing
+ostream& operator<<(ostream& os, const tContainer_t<T,Container>&);
 
 
 
