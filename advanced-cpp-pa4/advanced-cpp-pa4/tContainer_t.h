@@ -1,6 +1,7 @@
 #pragma once
 #include <algorithm> 
 #include <string>
+#include <queue>
 
 using namespace std;
 
@@ -23,6 +24,10 @@ public:
 	T* find(const T& element) const;
 	bool remove(const T& element);
 	void removeAll();
+
+	typedef typename Container::iterator iter_t;
+private:
+	Container c;
 };
 
 ostream& operator<<(ostream& os, const tContainer_t<T,Container>&); //not needed but may be good for testing
