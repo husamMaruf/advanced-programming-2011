@@ -137,6 +137,14 @@ int main(int argc, char** argv) {
 	cout << deqContainer.empty() << endl;
 	cout << deqContainer.size() << endl;
 
+	cout << "###" << endl;
+	cout << "vct:  " << vctContainer << endl;
+	cout << "lst1: " << lstContainer << endl;
+	cout << "lst2: " << lstContainer2 << endl;
+	cout << "lst3: " << lstContainer3 << endl;
+	cout << "lst4: " << lstContainer4 << endl;
+	cout << "deq:  " << deqContainer << endl;
+
 	system("Pause");
 
 	return 0;

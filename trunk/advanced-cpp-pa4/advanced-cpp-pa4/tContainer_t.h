@@ -81,6 +81,19 @@ private:
 
 	Container c;
 
+	friend ostream& operator<<(ostream& os, const tContainer_t<T,Container>& tContainer) {
+		os << "[";
+		if (!tContainer.empty()) {
+			iter_t it = tContainer.c.begin();
+			os << *it;
+			it++;
+			for(; it != tContainer.c.end(); it++) {
+				os << ", " << *it;
+			}
+		}
+		os << "]";
+		return os;
+	}
 };
 
-//ostream& operator<<(ostream& os, const tContainer_t<T,Container>&);
+
