@@ -25,13 +25,14 @@ public:
 		return *this;
 	}
 	
-	T* operator[](unsigned index) const {
+	T*& operator[](unsigned index) {
 		if (index >= size()) {
-			return 0;
+			static T* result = 0;
+			return result;
 		}
 		cIter_t it = c.begin();
 		for(int i=0; i<index; i++, it++);
-		return *it;
+		return (T*)*it;
 	}
 	
 	const tContainer_t& operator+=(tContainer_t<T,Container>& tContainer) {
