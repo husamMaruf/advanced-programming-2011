@@ -26,7 +26,7 @@ public:
 	}
 	
 	T*& operator[](unsigned index) {
-		if (index >= size()) {
+		if (index < 0 || index >= size()) {
 			static T* result;
 			result = 0; // Because the user can change it
 			return result;
@@ -88,10 +88,10 @@ private:
 		os << "[";
 		if (!tContainer.empty()) {
 			cIter_t it = tContainer.c.begin();
-			os << *it;
+			os << **it << "(" << *it << ")";
 			it++;
 			for(; it != tContainer.c.end(); it++) {
-				os << ", " << *it;
+				os << ", " << **it << "(" << *it << ")";
 			}
 		}
 		os << "]";
