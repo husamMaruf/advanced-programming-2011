@@ -3,171 +3,179 @@
 #include <list>
 #include <deque>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
+// abstract class to generate values for testing
+template<class T>
+class Generator {
+public:
+	virtual T operator()() = 0;
+};
+
+// int implementation of Generator<int>
+class IntGenerator : public Generator<int> {
+public:
+	IntGenerator() : value(0) { }
+	int operator()() {
+		int result = value;
+		value += 1;
+		return result;
+	}
+
+protected:
+	int value;
+};
+
+
+template<class T, class Container>
+void test(tContainer_t<T,Container>& cont, Generator<T>& generator) {
+	
+	char answer;
+	bool quit = false;
+	int index;
+	
+	T* value;
+	T actualValue;
+
+	tContainer_t<T,Container>* c1 = 0;
+	tContainer_t<T,Container> c2;
+
+	while(!quit) {
+		
+		cout << "Make your choice:" << endl;
+		cout << "[a] Default CTOR" << endl;
+		cout << "[b] Copy CTOR" << endl;
+		cout << "[c] operator=" << endl;
+		cout << "[d] operator[] (retrieve value)" << endl;
+		cout << "[e] operator[] (assign value)" << endl;
+		cout << "[f] operator+=" << endl;
+		cout << "[g] empty" << endl;
+		cout << "[h] size" << endl;
+		cout << "[i] append" << endl;
+		cout << "[j] front" << endl;
+		cout << "[k] back" << endl;
+		cout << "[l] find" << endl;
+		cout << "[m] remove" << endl;
+		cout << "[n] remove all" << endl;
+		cout << "[p] print cont" << endl;
+		cout << "[q] quit" << endl;
+
+		cin >> answer;
+
+		switch(answer) {
+			
+			case 'a':
+				c1 = new tContainer_t<T,Container>();
+				cout << "Called default CTOR" << endl;
+				cout << *c1 << endl;
+				delete c1;
+				break;
+			case 'b':
+
+				break;
+			case 'c':
+				c2 = cont;
+				cout << "Called operator=" << endl;
+				cout << c2 << endl;
+				break;
+			case 'd':
+				cout << "enter index:" << endl;
+				cin >> index;
+				value = cont[index];
+				if (value == 0) cout << "Not found" << endl;
+				else cout << "Value: " << *value << endl;
+				break;
+			case 'e':
+				cout << "enter index:" << endl;
+				cin >> index;
+				value = new T;
+				*value = generator();
+				cout << "Before: " << cont << endl;
+				cont[index] = value;
+				cout << "updated container" << endl;
+				cout << "After: " << cont << endl;
+				break;
+			case 'f':
+				c2.removeAll();
+				value = new T;
+				*value = generator();
+				c2.append(value);
+				value = new T;
+				*value = generator();
+				c2.append(value);
+				cout << "Before: " << cont << endl;
+				cont += c2;
+				cout << "Moved elements from one container to another" << endl;
+				cout << "After: " << cont << endl;
+				break;
+			case 'g':
+				cout << "cont is empty? " << (cont.empty() ? "true" : "false") << endl;
+				break;
+			case 'h':
+				cout << "cont size: " << cont.size() << endl;
+				break;
+			case 'i':
+				value = new T;
+				*value = generator();
+				cout << "Before: " << cont << endl;
+				cont.append(value);
+				cout << "added new element to cont" << endl;
+				cout << "After: " << cont << endl;
+				break;
+			case 'j':
+				if (cont.empty()) cout << "empty" << endl;
+				else cout << "Value: " << *cont.front() << endl;
+				break;
+			case 'k':
+				if (cont.empty()) cout << "empty" << endl;
+				else cout << "Value: " << *cont.back() << endl;				
+				break;
+			case 'l':
+				cout << "enter value to find: " << endl;
+				cin >> actualValue;
+				value = cont.find(actualValue);
+				if (value == 0) cout << "Not found" << endl;
+				else cout << "Found Value: " << *value << endl;
+				break;
+			case 'm':
+				cout << "enter value to remove: " << endl;
+				cin >> actualValue;
+				cout << "Before: " << cont << endl;
+				value = cont.remove(actualValue);
+				if (value == 0) cout << "Not found" << endl;
+				else cout << "Removed Value: " << *value << endl;
+				cout << "After: " << cont << endl;
+				break;
+			case 'n':
+				cout << "Before: " << cont << endl;
+				cont.removeAll();
+				cout << "remove all elements from cont" << endl;
+				cout << "After: " << cont << endl;
+				break;
+			case 'p':
+				cout << cont << endl;
+				break;
+			case 'q':
+				quit = true;
+				break;
+			default:
+				cout << "Bad choice, try again" << endl;
+
+		}
+
+		cout << "\n\n";
+	}
+}
+
+
 int main(int argc, char** argv) {
 
-	int* n = new int;
-	*n = 5;
+	IntGenerator generator;
+	tContainer_t<int,list<int*>> intListContainer;
 
-	int* m = new int;
-	*m = 6;
-
-	int* l = new int;
-	*l = 5;
-
-	tContainer_t<int, vector<int*>> vctContainer;
-	vctContainer.append(n);
-	vctContainer.append(m);
-	vctContainer.append(l);
-	
-	tContainer_t<int, list<int*>> lstContainer;
-	lstContainer.append(n);
-	lstContainer.append(m);
-	lstContainer.append(l);
-
-	tContainer_t<int, list<int*>> lstContainer2 = lstContainer;
-
-	tContainer_t<int, list<int*>> lstContainer3;
-	lstContainer3.append(l);
-	lstContainer3.append(m);
-	lstContainer3.append(n);
-
-	tContainer_t<int, list<int*>> lstContainer4;
-	lstContainer4.append(l);
-	lstContainer4.append(m);
-	lstContainer4.append(n);
-	lstContainer4 = lstContainer;
-
-	int i = 5;
-	int* ip1 = vctContainer.find(i);
-	int* ip2 = lstContainer.find(i);
-	int* ip3 = lstContainer2.find(i);
-	int* ip4 = lstContainer3.find(i);
-	int* ip5 = lstContainer4.find(i);
-	
-	cout << (ip1 == ip2) << endl;
-	cout << (ip2 == ip3) << endl;
-	cout << (ip3 == ip4) << endl;
-	cout << (ip4 == ip5) << endl;
-	cout << (ip5 == ip3) << endl;
-	
-	cout << "###" << endl;
-
-	cout << (ip1 == n) << endl;
-	cout << (ip1 == m) << endl;
-	cout << (ip1 == l) << endl;
-
-	cout << "###" << endl;
-
-	cout << *vctContainer[0] << endl;
-	cout << *vctContainer[1] << endl;
-	cout << *vctContainer[2] << endl;
-
-	cout << "###" << endl;
-
-	cout << *lstContainer[0] << endl;
-	cout << *lstContainer[1] << endl;
-	cout << *lstContainer[2] << endl;
-
-	cout << "###" << endl;
-
-	cout << *lstContainer3[0] << endl;
-	cout << *lstContainer3[1] << endl;
-	cout << *lstContainer3[2] << endl;
-
-	lstContainer += lstContainer3;
-
-	cout << "###" << endl;
-
-	cout << lstContainer.size() << endl;
-	cout << lstContainer3.size() << endl;
-	cout << lstContainer.empty() << endl;
-	cout << lstContainer3.empty() << endl;
-
-	cout << "###" << endl;
-
-	cout << *lstContainer[0] << endl;
-	cout << *lstContainer[1] << endl;
-	cout << *lstContainer[2] << endl;
-	cout << *lstContainer[3] << endl;
-	cout << *lstContainer[4] << endl;
-	cout << *lstContainer[5] << endl;
-	
-	cout << (lstContainer[0] == lstContainer[5]) << endl;
-
-	cout << "####" << endl;
-
-	tContainer_t<int, deque<int*>> deqContainer;
-	int* i1 = new int;
-	int* i2 = new int;
-	int* i3 = new int;
-	int* i5 = new int;
-
-	*i1 = 1;
-	*i2 = 2;
-	*i3 = 3;
-	*i5 = 5;
-
-	deqContainer.append(i1);
-	deqContainer.append(i2);
-	deqContainer.append(i3);
-	deqContainer.append(i5);
-
-	cout << *deqContainer.front() << endl;
-	cout << *deqContainer.back() << endl;
-
-	cout << "###" << endl;
-
-	cout << *deqContainer.find(2) << endl;
-	cout << deqContainer.find(4) << endl;
-
-	cout << "###" << endl;
-	
-	cout << "size: " << deqContainer.size() << endl;
-	cout << *deqContainer.remove(2) << endl;
-	cout << deqContainer.remove(4) << endl;
-	cout << "size: " << deqContainer.size() << endl;
-
-	cout << "###" << endl;
-
-	deqContainer.removeAll();
-
-	cout << deqContainer.empty() << endl;
-	cout << deqContainer.size() << endl;
-
-	cout << "###" << endl;
-	cout << "vct:  " << vctContainer << endl;
-	cout << "lst1: " << lstContainer << endl;
-	cout << "lst2: " << lstContainer2 << endl;
-	cout << "lst3: " << lstContainer3 << endl;
-	cout << "lst4: " << lstContainer4 << endl;
-	cout << "deq:  " << deqContainer << endl;
-
-	cout << "###" << endl;
-
-	//vctContainer += lstContainer4;
-
-	cout << vctContainer << endl;
-	cout << lstContainer4 << endl;
-
-	cout << "###" << endl;
-	
-	tContainer_t<int, list<int*>> lstContainer5;
-	int* i6 = new int;
-	*i6 = 13;
-	int* i7 = new int;
-	*i7 = 123;
-	lstContainer5.append(i6);
-
-	cout << "lst5: " << lstContainer5 << endl;
-	cout << *lstContainer5[0] << endl;
-	lstContainer5[0] = i7;
-	cout << "lst5: " << lstContainer5 << endl;
-	cout << *lstContainer5[0] << endl;
-
-	cout << "###" << endl;
+	test(intListContainer, generator);
 
 	system("Pause");
 
