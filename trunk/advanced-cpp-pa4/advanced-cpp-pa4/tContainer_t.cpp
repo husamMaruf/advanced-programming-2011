@@ -145,6 +145,13 @@ int main(int argc, char** argv) {
 	cout << "lst4: " << lstContainer4 << endl;
 	cout << "deq:  " << deqContainer << endl;
 
+	cout << "###" << endl;
+
+	//vctContainer += lstContainer4;
+
+	cout << vctContainer << endl;
+	cout << lstContainer4 << endl;
+
 	system("Pause");
 
 	return 0;
