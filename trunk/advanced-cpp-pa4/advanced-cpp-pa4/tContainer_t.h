@@ -10,7 +10,7 @@ public:
 	typedef typename Container::const_iterator cIter_t;
 	typedef typename Container::iterator iter_t;
 
-	tContainer_t() { } // nothing to do
+	tContainer_t() {} // nothing to do
 
 	tContainer_t(const tContainer_t<T,Container>& tContainer) { 
 		c = tContainer.c;
@@ -27,7 +27,8 @@ public:
 	
 	T*& operator[](unsigned index) {
 		if (index >= size()) {
-			static T* result = 0;
+			static T* result;
+			result = 0; // Because the user can change it
 			return result;
 		}
 		cIter_t it = c.begin();
