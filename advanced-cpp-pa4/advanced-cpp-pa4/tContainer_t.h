@@ -7,7 +7,8 @@ template <class T,class Container>
 class tContainer_t {
 public:
 
-	typedef typename Container::const_iterator iter_t;
+	typedef typename Container::const_iterator cIter_t;
+	typedef typename Container::iterator iter_t;
 
 	tContainer_t() { } // nothing to do
 
@@ -25,11 +26,11 @@ public:
 	}
 	
 	T* operator[](unsigned index) const {
-		iter_t it = c.begin();
-		for(int i=0; it != c.end() && i<index; i++, it++);
-		if (it == c.end()) {
+		if (index >= size()) {
 			return 0;
 		}
+		cIter_t it = c.begin();
+		for(int i=0; i<index; i++, it++);
 		return *it;
 	}
 	
@@ -52,7 +53,7 @@ public:
 	T* back() const { return (c.back()); }
 	
 	T* find(const T& element) const {
-		iter_t it = find_if(c.begin(), c.end(), Pred(element));
+		cIter_t it = find_if(c.begin(), c.end(), Pred(element));
 		if (it == c.end()) {
 			return 0;
 		}
@@ -60,7 +61,7 @@ public:
 	}
 	
 	T* remove(const T& element) {
-		iter_t it = find_if(c.begin(), c.end(), Pred(element));
+		cIter_t it = find_if(c.begin(), c.end(), Pred(element));
 		if (it == c.end()) {
 			return 0;
 		}
@@ -84,7 +85,7 @@ private:
 	friend ostream& operator<<(ostream& os, const tContainer_t<T,Container>& tContainer) {
 		os << "[";
 		if (!tContainer.empty()) {
-			iter_t it = tContainer.c.begin();
+			cIter_t it = tContainer.c.begin();
 			os << *it;
 			it++;
 			for(; it != tContainer.c.end(); it++) {
@@ -94,6 +95,6 @@ private:
 		os << "]";
 		return os;
 	}
-};
 
+};
 
