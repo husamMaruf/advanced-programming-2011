@@ -152,6 +152,23 @@ int main(int argc, char** argv) {
 	cout << vctContainer << endl;
 	cout << lstContainer4 << endl;
 
+	cout << "###" << endl;
+	
+	tContainer_t<int, list<int*>> lstContainer5;
+	int* i6 = new int;
+	*i6 = 13;
+	int* i7 = new int;
+	*i7 = 123;
+	lstContainer5.append(i6);
+
+	cout << "lst5: " << lstContainer5 << endl;
+	cout << *lstContainer5[0] << endl;
+	lstContainer5[0] = i7;
+	cout << "lst5: " << lstContainer5 << endl;
+	cout << *lstContainer5[0] << endl;
+
+	cout << "###" << endl;
+
 	system("Pause");
 
 	return 0;
