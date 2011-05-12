@@ -1,21 +1,34 @@
 #pragma once
 
-#include "Subject.h"
+#include <iostream>
+#include <vector>
 
-class Bank : public Subject {
+using namespace std;
+
+class Bank {
 public:
 
-	static Bank* getInstance();
-	static void destroyInstance();
+    static Bank* getInstance();
+    static void destroyInstance();
+    
+    struct Predicate {
+        boolean operator()(const Account& account) = 0;
+    }
 
 protected:
-	virtual ~Bank();
+    virtual ~Bank();
+    
+    virtual void Attach(Account*);
+    virtual void Detach(Account*);
+    virtual void Notify(Predicate& pred);
 
 private:
 
-	static Bank* instance;
+    static Bank* instance;
 
-	Bank();
-	Bank(const Bank& bank);
-	void operator=(const Bank& bank);
+    Bank();
+    Bank(const Bank& bank);
+    void operator=(const Bank& bank);
+    
+    vector<Account*> m_accounts; 
 };

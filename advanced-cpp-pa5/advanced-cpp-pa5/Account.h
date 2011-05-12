@@ -1,18 +1,40 @@
 #pragma once
 
-#include "Observer.h"
-
 class AccountImpl;
 
-class Account : public Observer {
+class Account {
 public:
-		
-	virtual ~Account(void);
-	Account();
+        
+    virtual ~Account(void);
+    Account();
+   
+    virtual void Update();
+
+    SavingPeriod getSavingPeriod();
+    Date getOpeningDate();
+    double getPercentOnDeposit();
+    AccountType getAccountType();
+    
 
 protected:
-	
-	AccountImpl* accountImpl;
-
-
+    
+    AccountImpl* accountImpl;
 };
+
+enum SavingPeriod {
+    ThreeYears = 3,
+    SevenYears = 7,
+    TenYears = 10;
+}
+
+enum AccountType {
+    FamilyAccount,
+    NormalAccount,
+    StockAccount;
+}
+
+struct Date {
+    int day;
+    int month;
+    int year;
+}
