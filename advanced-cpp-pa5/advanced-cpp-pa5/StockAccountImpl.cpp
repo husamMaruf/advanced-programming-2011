@@ -9,6 +9,3 @@ void StockAccountImpl::Update() {
 	cout << "Updated Stock account" << endl;
 }
 
-AccountType StockAccountImpl::getAccountType() {
-	return 1;
-}

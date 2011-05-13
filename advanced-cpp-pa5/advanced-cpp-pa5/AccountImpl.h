@@ -15,7 +15,6 @@ public:
     int getSavingPeriod();
     cDate_t getOpeningDate();
     double getPercentOnDeposit();
-    virtual AccountType getAccountType() = 0;
     
 protected:
 
