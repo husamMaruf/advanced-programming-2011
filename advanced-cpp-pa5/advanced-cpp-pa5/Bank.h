@@ -12,17 +12,17 @@ public:
 
     static Bank* getInstance();
     static void destroyInstance();
-    
+
+    virtual void Attach(Account*);
+    virtual void Detach(Account*);
+    virtual void Notify(Predicate& pred);
+
     struct Predicate {
         boolean operator()(Account* account) = 0;
     };
 
 protected:
     virtual ~Bank();
-    
-    virtual void Attach(Account*);
-    virtual void Detach(Account*);
-    virtual void Notify(Predicate& pred);
 
 private:
 
