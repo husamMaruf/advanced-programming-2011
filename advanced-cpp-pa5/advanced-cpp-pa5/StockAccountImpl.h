@@ -3,6 +3,9 @@
 
 class StockAccountImpl : public AccountImpl {
 public:
-	StockAccountImpl();
-	~StockAccountImpl();
+    StockAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+    virtual ~StockAccountImpl();
+    
+    virtual AccountType getAccountType();
+    virtual void Update();
 };

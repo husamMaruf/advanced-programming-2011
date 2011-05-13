@@ -3,6 +3,9 @@
 
 class NormalAccountImpl : public AccountImpl {
 public:
-	NormalAccountImpl();
-	virtual ~NormalAccountImpl();
+    NormalAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+    virtual ~NormalAccountImpl();
+    
+    virtual AccountType getAccountType();
+    virtual void Update();
 };
