@@ -199,7 +199,19 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Observer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\StockAccountImpl.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Subject.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Tester.cpp"
 				>
 			</File>
 		</Filter>
@@ -237,7 +249,15 @@
 				>
 			</File>
 			<File
+				RelativePath=".\Observer.h"
+				>
+			</File>
+			<File
 				RelativePath=".\StockAccountImpl.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Subject.h"
 				>
 			</File>
 		</Filter>

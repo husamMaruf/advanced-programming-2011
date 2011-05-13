@@ -1,26 +1,26 @@
 #pragma once
 
+#include "Observer.h"
+#include "Subject.h"
 #include "cDate_t.h"
 
 typedef int AccountType;
 
 class AccountImpl;
 
-class Account {
+class Account : public Observer {
 public:
         
-    virtual ~Account(void);
-    Account(AccountType accountType, int savingPeriod, double percentOnDeposit, cDate_t& openingDate);
-    Account(AccountType accountType, int savingPeriod, double percentOnDeposit);
-   
-    virtual void Update();
+    Account(Subject* subject, AccountType accountType, int savingPeriod, double percentOnDeposit, cDate_t& openingDate);
+    Account(Subject* subject, AccountType accountType, int savingPeriod, double percentOnDeposit);
+	virtual ~Account();
+		
+	virtual void Update(Subject* ChngSubject);
 
     int getSavingPeriod();
     cDate_t& getOpeningDate();
     double getPercentOnDeposit();
-    AccountType getAccountType();
-    
+
 protected:
-    
     AccountImpl* accountImpl;
 };

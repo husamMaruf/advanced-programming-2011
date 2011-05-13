@@ -9,6 +9,3 @@ void NormalAccountImpl::Update() {
 	cout << "Updated Normal account" << endl;
 }
 
-AccountType NormalAccountImpl::getAccountType() {
-	return 2;
-}
