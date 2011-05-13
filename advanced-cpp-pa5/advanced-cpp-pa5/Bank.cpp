@@ -19,20 +19,20 @@ void Bank::destroyInstance() {
 }
 
 void Bank::Attach (Account* account) { 
-    m_accounts.push_back(ob); 
+    m_accounts.push_back(account); 
 } 
 
 void Bank::Detach (Account* account) { 
     int i=0; 
     for (i = 0; i < m_accounts.size(); i++) 
-        if (m_accounts[i] == ob) break; 
+        if (m_accounts[i] == account) break; 
     m_accounts.erase(m_accounts.begin() + i); 
 } 
 
 void Bank::Notify (Predicate& pred) { 
     for (int i = 0; i < m_accounts.size(); i++) {
         if (pred(m_accounts[i]) {      
-            (m_accounts[i])->Update(this); 
+            (m_accounts[i])->Update(); 
         }
     }
 }
@@ -41,7 +41,7 @@ struct Bank::FamilyAccountFilter: public Predicate {
 	boolean operator()(const Account& account) {
 		return account.getAccountType() == 3;
 	};
-}
+};
 
 struct Bank::LongPeriodAccountFilter: public Predicate {
 	boolean operator()(const Account& account) {
@@ -50,7 +50,7 @@ struct Bank::LongPeriodAccountFilter: public Predicate {
 		}
 		return false;
 	};
-}
+};
 
 struct Bank::NormalAccountExpireFilter: public Predicate {
 	boolean operator()(const Account& account) {
@@ -59,5 +59,5 @@ struct Bank::NormalAccountExpireFilter: public Predicate {
 		}
 		return false;
 	};
-}
+};
 
