@@ -2,7 +2,7 @@
 
 Bank* Bank::instance = 0;
 
-Bank::Bank() {}
+Bank::Bank(): accountNumberCounter(1) { }
 
 Bank::~Bank() {}
 
@@ -16,6 +16,26 @@ Bank* Bank::getInstance() {
 void Bank::destroyInstance() {
     delete instance;
 	instance = 0;
+}
+
+int Bank::openNewAccount(AccountType accountType, int savingPeriod, double percentOnDeposit) {
+	m_accounts.push_back(new Account(this,accountType,accountNumberCounter,savingPeriod,percentOnDeposit));
+	accountNumberCounter++;
+	return accountNumberCounter-1;
+}
+
+void Bank::removeAccount(int accountNumber) {
+	vector<Account*>::iterator iter = m_accounts.begin();
+	while (iter != m_accounts.end()) {
+		if ((*iter)->getAccountNumber() == accountNumber) {
+			Account* account = *iter;
+			m_accounts.erase(iter);
+			delete account;
+			break;
+		} else {
+			iter++;
+		}
+	}
 }
 
 void Bank::investInStockExchange() {

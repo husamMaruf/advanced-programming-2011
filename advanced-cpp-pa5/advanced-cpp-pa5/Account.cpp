@@ -2,16 +2,16 @@
 #include "AccountImpl.h"
 #include "AccountFactory.h"
 
-Account::Account(Subject* subject, AccountType accountType, int savingPeriod, double percentOnDeposit, cDate_t& openingDate) {
+Account::Account(Subject* subject, AccountType accountType, int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t& openingDate) {
 	sbj = subject;
 	sbj->Attach(this);
-	accountImpl = AccountFactory::createAccount(accountType, savingPeriod, percentOnDeposit, openingDate);
+	accountImpl = AccountFactory::createAccount(accountType, accountNumber, savingPeriod, percentOnDeposit, openingDate);
 }
 
-Account::Account(Subject* subject, AccountType accountType, int savingPeriod, double percentOnDeposit) {
+Account::Account(Subject* subject, AccountType accountType, int accountNumber, int savingPeriod, double percentOnDeposit) {
 	sbj = subject;
 	sbj->Attach(this);
-	accountImpl = AccountFactory::createAccount(accountType, savingPeriod, percentOnDeposit, cDate_t());
+	accountImpl = AccountFactory::createAccount(accountType, accountNumber, savingPeriod, percentOnDeposit, cDate_t());
 }
 
 Account::~Account() {

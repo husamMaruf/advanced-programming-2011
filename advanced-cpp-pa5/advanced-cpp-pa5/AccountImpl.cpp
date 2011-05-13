@@ -1,10 +1,11 @@
 #include "AccountImpl.h"
 
-AccountImpl::AccountImpl(int _savingPeriod, double _percentOnDeposit, cDate_t _openingDate) :
+AccountImpl::AccountImpl(int _accountNumber, int _savingPeriod, double _percentOnDeposit, cDate_t _openingDate) :
 	savingPeriod(_savingPeriod), 
 	percentOnDeposit(_percentOnDeposit), 
 	openingDate(_openingDate),
-	message(new string("")) { }
+	message(new string("")),
+	accountNumber(_accountNumber) { }
 
 AccountImpl::~AccountImpl() {
 	delete message;

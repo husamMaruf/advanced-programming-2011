@@ -1,13 +1,13 @@
 #include "AccountFactory.h"
 
-AccountImpl* AccountFactory::createAccount(AccountType accountType, int savingPeriod, double getPercentOnDeposit, cDate_t openingDate) {
+AccountImpl* AccountFactory::createAccount(AccountType accountType, int accountNumber, int savingPeriod, double getPercentOnDeposit, cDate_t openingDate) {
 	switch (accountType) {
 		case 1:
-			return new StockAccountImpl(savingPeriod, getPercentOnDeposit, openingDate);			
+			return new StockAccountImpl(accountNumber, savingPeriod, getPercentOnDeposit, openingDate);			
 		case 2:
-			return new NormalAccountImpl(savingPeriod, getPercentOnDeposit, openingDate);
+			return new NormalAccountImpl(accountNumber, savingPeriod, getPercentOnDeposit, openingDate);
 		case 3:
-			return new FamilyAccountImpl(savingPeriod, getPercentOnDeposit, openingDate);
+			return new FamilyAccountImpl(accountNumber, savingPeriod, getPercentOnDeposit, openingDate);
 	}			
 }
 

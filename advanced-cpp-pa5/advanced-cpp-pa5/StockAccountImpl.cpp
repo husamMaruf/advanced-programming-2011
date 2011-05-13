@@ -1,7 +1,7 @@
 #include "StockAccountImpl.h"
 
-StockAccountImpl::StockAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate) :
-AccountImpl(savingPeriod,percentOnDeposit,openingDate) { }
+StockAccountImpl::StockAccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t openingDate) :
+AccountImpl(accountNumber,savingPeriod,percentOnDeposit,openingDate) { }
 
 StockAccountImpl::~StockAccountImpl() { }
 
