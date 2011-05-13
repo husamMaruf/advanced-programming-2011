@@ -35,14 +35,14 @@ private:
     vector<Account*> m_accounts; 
 
 	struct FamilyAccountFilter: public Predicate {
-        boolean operator()(const Account& account);
+        boolean operator()(Account* account);
     };
 
 	struct LongPeriodAccountFilter: public Predicate {
-        boolean operator()(const Account& account);
+        boolean operator()(Account* account);
     };
 
 	struct NormalAccountExpireFilter: public Predicate {
-        boolean operator()(const Account& account);
+        boolean operator()(Account* account);
     };
 };
