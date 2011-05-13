@@ -31,7 +31,7 @@ void Bank::Detach (Account* account) {
 
 void Bank::Notify (Predicate& pred) { 
     for (int i = 0; i < m_accounts.size(); i++) {
-        if (pred(m_accounts[i]) {      
+        if (pred(m_accounts[i])) {      
             (m_accounts[i])->Update(); 
         }
     }
