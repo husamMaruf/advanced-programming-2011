@@ -2,13 +2,9 @@
 
 Bank* Bank::instance = 0;
 
-Bank::Bank() {
+Bank::Bank() {}
 
-}
-
-Bank::~Bank() {
-
-}
+Bank::~Bank() {}
 
 Bank* Bank::getInstance() {
     if (instance == 0) {
@@ -19,6 +15,7 @@ Bank* Bank::getInstance() {
 
 void Bank::destroyInstance() {
     delete instance;
+	instance = 0;
 }
 
 void Bank::Attach (Account* account) { 
@@ -61,7 +58,7 @@ struct LongPeriodAccountFilter: public Predicate {
 	}
 }
 
-struct NormalAccountFilter: public Predicate {
+struct NormalAccountExpireFilter: public Predicate {
 	boolean operator()(const Account& account) {
 		if (account.getAccountType()) {
 			return account.getOpeningDate().calcYearsElapsed() >= 2;
