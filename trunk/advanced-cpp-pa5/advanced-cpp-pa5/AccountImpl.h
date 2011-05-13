@@ -1,21 +1,26 @@
 #pragma once
 
+#include "cDate_t.h"
+
+typedef AccountType int;
+
 class AccountImpl {
 public:
-    AccountImpl(void);
-    virtual ~AccountImpl(void);
+
+    AccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+    virtual ~AccountImpl();
     
     virtual void Update() = 0;
     
-    SavingPeriod getSavingPeriod();
-    Date getOpeningDate();
+    int getSavingPeriod();
+    cDate_t getOpeningDate();
     double getPercentOnDeposit();
-    AccountType getAccountType() = 0;
+    virtual AccountType getAccountType() = 0;
     
 private:
     
     double percentOnDeposit;
-    Date openedDate;
-    SavingPeriod savingPeriod;
+    cDate_t openedDate;
+    int savingPeriod;
 
 };

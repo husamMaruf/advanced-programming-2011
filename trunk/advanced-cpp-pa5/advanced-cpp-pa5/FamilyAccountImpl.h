@@ -3,6 +3,9 @@
 
 class FamilyAccountImpl : public AccountImpl {
 public:
-	FamilyAccountImpl();
-	virtual ~FamilyAccountImpl();
+    FamilyAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+    virtual ~FamilyAccountImpl();
+   
+    virtual AccountType getAccountType();
+    virtual void Update();
 };
