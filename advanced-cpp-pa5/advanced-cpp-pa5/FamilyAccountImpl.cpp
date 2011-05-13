@@ -6,6 +6,10 @@ AccountImpl(savingPeriod,percentOnDeposit,openingDate) { }
 FamilyAccountImpl::~FamilyAccountImpl() { }
 
 void FamilyAccountImpl::Update() {
-	cout << "Updated Family account" << endl;
+	cout << "Updated Family account:" << endl;
+	cout << *getMesssage() << endl;
 }
 
+AccountType FamilyAccountImpl::getAccountType() {
+	return 3;
+}

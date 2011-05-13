@@ -20,6 +20,7 @@ public:
     int getSavingPeriod();
     cDate_t& getOpeningDate();
     double getPercentOnDeposit();
+	AccountType getAccountType();
 
 protected:
     AccountImpl* accountImpl;

@@ -37,3 +37,7 @@ double Account::getPercentOnDeposit() {
 int Account::getSavingPeriod() {
 	return accountImpl->getSavingPeriod();
 }
+
+AccountType Account::getAccountType() {
+	return accountImpl->getAccountType();
+}
