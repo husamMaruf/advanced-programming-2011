@@ -187,7 +187,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\advanced-cpp-pa2\advanced-cpp-pa2\cDate_t.cpp"
+				RelativePath=".\cDate_t.cpp"
 				>
 			</File>
 			<File
@@ -225,7 +225,7 @@
 				>
 			</File>
 			<File
-				RelativePath="..\..\advanced-cpp-pa2\advanced-cpp-pa2\cDate_t.h"
+				RelativePath=".\cDate_t.h"
 				>
 			</File>
 			<File

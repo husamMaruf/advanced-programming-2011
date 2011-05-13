@@ -2,14 +2,14 @@
 
 #include "cDate_t.h"
 
-typedef AccountType int;
+typedef int AccountType;
 
 class AccountImpl {
-public:
+	
+	friend class AccountFactory;
 
-    AccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
-    virtual ~AccountImpl();
-    
+public:
+   
     virtual void Update() = 0;
     
     int getSavingPeriod();
@@ -17,10 +17,15 @@ public:
     double getPercentOnDeposit();
     virtual AccountType getAccountType() = 0;
     
+protected:
+
+	AccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+    virtual ~AccountImpl();
+
 private:
-    
+
     double percentOnDeposit;
-    cDate_t openedDate;
+    cDate_t openingDate;
     int savingPeriod;
 
 };

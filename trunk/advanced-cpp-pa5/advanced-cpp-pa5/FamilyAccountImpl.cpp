@@ -1,9 +1,14 @@
 #include "FamilyAccountImpl.h"
 
-FamilyAccountImpl::FamilyAccountImpl() {
+FamilyAccountImpl::FamilyAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate) :
+AccountImpl(savingPeriod,percentOnDeposit,openingDate) { }
 
+FamilyAccountImpl::~FamilyAccountImpl() { }
+
+void FamilyAccountImpl::Update() {
+	cout << "Updated Family account" << endl;
 }
 
-FamilyAccountImpl::~FamilyAccountImpl() {
-
+AccountType FamilyAccountImpl::getAccountType() {
+	return 3;
 }
