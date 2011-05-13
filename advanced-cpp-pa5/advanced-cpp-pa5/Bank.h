@@ -14,9 +14,14 @@ public:
     static Bank* getInstance();
     static void destroyInstance();
 
+	void investInStockExchange();
+	void giveBonusToFamiliesAccounts();
+	void arrangeMeetingWithClerk();
+
 private:
 
     static Bank* instance;
+	vector<Account*> m_accounts; 
 
     Bank();
     Bank(const Bank& bank);
