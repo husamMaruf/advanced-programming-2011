@@ -20,7 +20,7 @@ public:
     
 	string* getMesssage();
 
-	void setMessage(const string* message);
+	void setMessage(const string& message);
 
 protected:
 

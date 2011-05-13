@@ -21,6 +21,7 @@ public:
     cDate_t& getOpeningDate();
     double getPercentOnDeposit();
 	AccountType getAccountType();
+	void postMessage(const std::string& message);
 
 protected:
     AccountImpl* accountImpl;
