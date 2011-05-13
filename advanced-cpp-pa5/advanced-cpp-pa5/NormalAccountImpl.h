@@ -2,10 +2,11 @@
 #include "AccountImpl.h"
 
 class NormalAccountImpl : public AccountImpl {
+	friend class AccountFactory;
 public:
-    NormalAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
-    virtual ~NormalAccountImpl();
-    
     virtual AccountType getAccountType();
     virtual void Update();
+protected:
+	NormalAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+    virtual ~NormalAccountImpl();
 };

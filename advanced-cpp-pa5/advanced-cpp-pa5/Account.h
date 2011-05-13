@@ -2,22 +2,21 @@
 
 #include "cDate_t.h"
 
-typedef AccountType int;
+typedef int AccountType;
 
 class AccountImpl;
-
 
 class Account {
 public:
         
     virtual ~Account(void);
-    Account(AccountType accountType, int savingPeriod, double getPercentOnDeposit, cDate_t openingDate);
-    Account(AccountType accountType, int savingPeriod, double getPercentOnDeposit);
+    Account(AccountType accountType, int savingPeriod, double percentOnDeposit, cDate_t& openingDate);
+    Account(AccountType accountType, int savingPeriod, double percentOnDeposit);
    
     virtual void Update();
 
     int getSavingPeriod();
-    cDate_t getOpeningDate();
+    cDate_t& getOpeningDate();
     double getPercentOnDeposit();
     AccountType getAccountType();
     

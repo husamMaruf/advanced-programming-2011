@@ -1,9 +1,14 @@
 #include "NormalAccountImpl.h"
 
-NormalAccountImpl::NormalAccountImpl() {
+NormalAccountImpl::NormalAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate) :
+AccountImpl(savingPeriod,percentOnDeposit,openingDate) { }
 
+NormalAccountImpl::~NormalAccountImpl() { }
+
+void NormalAccountImpl::Update() {
+	cout << "Updated Normal account" << endl;
 }
 
-NormalAccountImpl::~NormalAccountImpl() {
-
+AccountType NormalAccountImpl::getAccountType() {
+	return 2;
 }
