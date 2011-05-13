@@ -41,3 +41,7 @@ int Account::getSavingPeriod() {
 AccountType Account::getAccountType() {
 	return accountImpl->getAccountType();
 }
+
+void Account::postMessage(const std::string& message) {
+	accountImpl->setMessage(message);
+}

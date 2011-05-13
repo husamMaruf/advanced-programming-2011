@@ -26,7 +26,7 @@ string* AccountImpl::getMesssage() {
 	return message;
 }
 
-void AccountImpl::setMessage(const std::string* _message) {
+void AccountImpl::setMessage(const string& _message) {
 	delete message;
-	message = new string(*_message);
+	message = new string(_message);
 }
