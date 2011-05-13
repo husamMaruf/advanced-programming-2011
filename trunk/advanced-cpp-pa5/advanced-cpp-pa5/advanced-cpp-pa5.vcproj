@@ -198,10 +198,6 @@
 				RelativePath=".\StockAccountImpl.cpp"
 				>
 			</File>
-			<File
-				RelativePath=".\Subject.cpp"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
@@ -233,15 +229,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\Observer.h"
-				>
-			</File>
-			<File
 				RelativePath=".\StockAccountImpl.h"
-				>
-			</File>
-			<File
-				RelativePath=".\Subject.h"
 				>
 			</File>
 		</Filter>
