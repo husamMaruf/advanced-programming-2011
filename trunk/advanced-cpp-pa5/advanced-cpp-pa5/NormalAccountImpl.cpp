@@ -1,7 +1,7 @@
 #include "NormalAccountImpl.h"
 
-NormalAccountImpl::NormalAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate) :
-AccountImpl(savingPeriod,percentOnDeposit,openingDate) { }
+NormalAccountImpl::NormalAccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t openingDate) :
+AccountImpl(accountNumber,savingPeriod,percentOnDeposit,openingDate) { }
 
 NormalAccountImpl::~NormalAccountImpl() { }
 

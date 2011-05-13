@@ -13,7 +13,7 @@ class AccountImpl;
 class AccountFactory {
 
 public:
-	static AccountImpl* createAccount(AccountType accountType, int savingPeriod, double getPercentOnDeposit, cDate_t openingDate);
+	static AccountImpl* createAccount(AccountType accountType, int accountNumber, int savingPeriod, double getPercentOnDeposit, cDate_t openingDate);
 	static void destroyAccount(AccountImpl* account);
 
 private:

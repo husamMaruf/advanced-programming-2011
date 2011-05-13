@@ -19,12 +19,13 @@ public:
     double getPercentOnDeposit();
     
 	string* getMesssage();
+	int getAccountNumber();
 
 	void setMessage(const string& message);
 
 protected:
 
-	AccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+	AccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t openingDate);
     virtual ~AccountImpl();
 
 private:
@@ -33,5 +34,6 @@ private:
     cDate_t openingDate;
     int savingPeriod;
 	string* message;
+	int accountNumber;
 
 };

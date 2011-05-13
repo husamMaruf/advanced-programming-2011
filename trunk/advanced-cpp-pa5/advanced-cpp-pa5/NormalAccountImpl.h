@@ -7,6 +7,6 @@ public:
     virtual void Update();
 	virtual AccountType getAccountType();
 protected:
-	NormalAccountImpl(int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+	NormalAccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t openingDate);
     virtual ~NormalAccountImpl();
 };
