@@ -1,6 +1,6 @@
 #include "AccountFactory.h"
 
-static AccountImpl* AccountFactory::createAccount(AccountType accountType, int savingPeriod, double getPercentOnDeposit, cDate_t openingDate) {
+AccountImpl* AccountFactory::createAccount(AccountType accountType, int savingPeriod, double getPercentOnDeposit, cDate_t openingDate) {
 	switch (accountType) {
 		case 1:
 			return new StockAccountImpl(savingPeriod, getPercentOnDeposit, openingDate);			
@@ -11,6 +11,6 @@ static AccountImpl* AccountFactory::createAccount(AccountType accountType, int s
 	}			
 }
 
-static void AccountFactory::destroyAccount(AccountImpl* account) {
+void AccountFactory::destroyAccount(AccountImpl* account) {
 	delete account;			
 }
