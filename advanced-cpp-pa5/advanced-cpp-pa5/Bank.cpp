@@ -40,7 +40,7 @@ void Bank::Notify (Predicate& pred) {
 struct Bank::FamilyAccountFilter: public Predicate {
 	boolean operator()(const Account& account) {
 		return account.getAccountType() == 3;
-	}
+	};
 }
 
 struct Bank::LongPeriodAccountFilter: public Predicate {
@@ -49,7 +49,7 @@ struct Bank::LongPeriodAccountFilter: public Predicate {
 			return account.getOpeningDate().calcYearsElapsed() <= 5;
 		}
 		return false;
-	}
+	};
 }
 
 struct Bank::NormalAccountExpireFilter: public Predicate {
@@ -58,6 +58,6 @@ struct Bank::NormalAccountExpireFilter: public Predicate {
 			return account.getOpeningDate().calcYearsElapsed() >= 2;
 		}
 		return false;
-	}
+	};
 }
 
