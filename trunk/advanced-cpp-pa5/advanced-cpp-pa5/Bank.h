@@ -15,7 +15,7 @@ public:
     
     struct Predicate {
         boolean operator()(const Account& account) = 0;
-    }
+    };
 
 protected:
     virtual ~Bank();
@@ -36,13 +36,13 @@ private:
 
 	struct FamilyAccountFilter: public Predicate {
         boolean operator()(const Account& account);
-    }
+    };
 
 	struct LongPeriodAccountFilter: public Predicate {
         boolean operator()(const Account& account);
-    }
+    };
 
 	struct NormalAccountExpireFilter: public Predicate {
         boolean operator()(const Account& account);
-    }
+    };
 };
