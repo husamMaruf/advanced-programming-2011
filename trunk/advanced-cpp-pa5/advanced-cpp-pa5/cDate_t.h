@@ -51,6 +51,8 @@ public:
 	const char* getDayName() const;
 	const char* getMonthName() const; 
 
+	int calcYearsElapsed() const;
+
 	void printDate(const PrintFormat& format); // not const because we modify printFormat
 	void setPrintFormat(const PrintFormat& format);
 	const PrintFormat& getPrintFormat() const;

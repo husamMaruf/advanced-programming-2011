@@ -143,6 +143,15 @@ const char* cDate_t::getMonthName() const {
 	return monthNames[current_time.tm_mon];
 }
 
+int cDate_t::calcYearsElapsed() const {
+	cDate_t currentDate;
+	int elapsedYears = currentDate.getYear() - getYear();
+	if (currentDate.getMonth() < getMonth() || (currentDate.getMonth() == getMonth() && currentDate.getDay() <= getDay())) {
+		elapsedYears--;
+	}
+	return elapsedYears
+}
+
 void cDate_t::printDate(const PrintFormat& format) {
 	setPrintFormat(format);
 	cout << *this;	
