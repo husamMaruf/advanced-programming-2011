@@ -11,7 +11,7 @@ Account::Account(AccountType accountType, int savingPeriod, double percentOnDepo
 }
 
 Account::~Account() {
-	AccountFactory::destoryAccount(accountImpl);
+	AccountFactory::destroyAccount(accountImpl);
 	accountImpl = 0;
 }
 

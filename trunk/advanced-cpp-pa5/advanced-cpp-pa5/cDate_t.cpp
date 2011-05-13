@@ -149,7 +149,7 @@ int cDate_t::calcYearsElapsed() const {
 	if (currentDate.getMonth() < getMonth() || (currentDate.getMonth() == getMonth() && currentDate.getDay() <= getDay())) {
 		elapsedYears--;
 	}
-	return elapsedYears
+	return elapsedYears;
 }
 
 void cDate_t::printDate(const PrintFormat& format) {

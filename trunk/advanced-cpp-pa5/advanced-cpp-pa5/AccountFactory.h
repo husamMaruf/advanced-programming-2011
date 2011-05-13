@@ -6,7 +6,7 @@
 #include "StockAccountImpl.h"
 #include "cDate_t.h"
 
-typedef AccountType int;
+typedef int AccountType;
 
 class AccountImpl;
 
