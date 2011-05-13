@@ -23,6 +23,7 @@ Account::~Account() {
 void Account::Update(Subject* ChngSubject) {
 	if(sbj == ChngSubject) {
 		accountImpl->Update();
+		clearChanged();
 	}
 }
 
