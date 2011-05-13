@@ -14,7 +14,7 @@ public:
     static void destroyInstance();
     
     struct Predicate {
-        boolean operator()(const Account& account) = 0;
+        boolean operator()(Account* account) = 0;
     };
 
 protected:
