@@ -187,6 +187,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\..\advanced-cpp-pa2\advanced-cpp-pa2\cDate_t.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\FamilyAccountImpl.cpp"
 				>
 			</File>
@@ -218,6 +222,10 @@
 			</File>
 			<File
 				RelativePath=".\Bank.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\advanced-cpp-pa2\advanced-cpp-pa2\cDate_t.h"
 				>
 			</File>
 			<File
