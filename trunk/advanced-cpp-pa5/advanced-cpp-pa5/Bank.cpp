@@ -40,9 +40,10 @@ void Bank::removeAccount(int accountNumber) {
 
 void Bank::investInStockExchange() {
 	for (int i = 0; i < m_accounts.size(); i++) {
-		if (m_accounts[i]->getSavingPeriod() == 10 && m_accounts[i]->getOpeningDate().calcYearsElapsed() <= 5) {
+		if (m_accounts[i]->getSavingPeriod() == 10 && 
+			m_accounts[i]->getOpeningDate().calcYearsElapsed() <= 5 &&
+			m_accounts[i]->getAccountType() == 1) {
 			m_accounts[i]->postMessage("We invested money in stock exchange for your account");
-			m_accounts[i]->setChanged();
 		}
 	}
 	Bank::Notify();
@@ -51,8 +52,7 @@ void Bank::investInStockExchange() {
 void Bank::giveBonusToFamiliesAccounts() {
 	for (int i = 0; i < m_accounts.size(); i++) {
 		if (m_accounts[i]->getAccountType() == 3) {
-			m_accounts[i]->postMessage("Your account was granted with a 500 Shakels bonus");
-			m_accounts[i]->setChanged();
+			m_accounts[i]->postMessage("Your account was granted with a 500 Shekels bonus");
 		}	
 	}
 	Bank::Notify();
@@ -61,9 +61,9 @@ void Bank::giveBonusToFamiliesAccounts() {
 
 void Bank::arrangeMeetingWithClerk() {
 	for (int i = 0; i < m_accounts.size(); i++) {
-		if (m_accounts[i]->getAccountType() == 1 && m_accounts[i]->getOpeningDate().calcYearsElapsed() >= 2) {
+		if (m_accounts[i]->getAccountType() == 2 && 
+			m_accounts[i]->getOpeningDate().calcYearsElapsed() == 2) {
 			m_accounts[i]->postMessage("Please come to the bank for a meeting with our clerk");
-			m_accounts[i]->setChanged();
 		}
 	}
 	Bank::Notify();

@@ -31,3 +31,7 @@ void AccountImpl::setMessage(const string& _message) {
 	delete message;
 	message = new string(_message);
 }
+
+int AccountImpl::getAccountNumber() {
+	return accountNumber;
+}
