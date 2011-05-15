@@ -44,5 +44,10 @@ AccountType Account::getAccountType() {
 }
 
 void Account::postMessage(const std::string& message) {
+	setChanged();
 	accountImpl->setMessage(message);
+}
+
+int Account::getAccountNumber() {
+	return accountImpl->getAccountNumber();
 }
