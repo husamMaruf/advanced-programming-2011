@@ -1,6 +1,6 @@
 #include "AccountImpl.h"
 
-AccountImpl::AccountImpl(int _accountNumber, int _savingPeriod, double _percentOnDeposit, cDate_t _openingDate) :
+AccountImpl::AccountImpl(int _accountNumber, int _savingPeriod, double _percentOnDeposit, const cDate_t& _openingDate) :
 	savingPeriod(_savingPeriod), 
 	percentOnDeposit(_percentOnDeposit), 
 	openingDate(_openingDate),
@@ -11,19 +11,19 @@ AccountImpl::~AccountImpl() {
 	delete message;
 }
 
-cDate_t AccountImpl::getOpeningDate() {
+const cDate_t& AccountImpl::getOpeningDate() const {
 	return openingDate;
 }
 
-int AccountImpl::getSavingPeriod() {
+int AccountImpl::getSavingPeriod() const {
 	return savingPeriod;
 }
 
-double AccountImpl::getPercentOnDeposit() {
+double AccountImpl::getPercentOnDeposit() const {
 	return percentOnDeposit;
 }
 
-string* AccountImpl::getMesssage() {
+const string* AccountImpl::getMesssage() const {
 	return message;
 }
 
@@ -32,6 +32,6 @@ void AccountImpl::setMessage(const string& _message) {
 	message = new string(_message);
 }
 
-int AccountImpl::getAccountNumber() {
+int AccountImpl::getAccountNumber() const {
 	return accountNumber;
 }

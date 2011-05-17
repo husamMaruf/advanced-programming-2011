@@ -5,8 +5,8 @@ class NormalAccountImpl : public AccountImpl {
 	friend class AccountFactory;
 public:
     virtual void Update();
-	virtual AccountType getAccountType();
+	virtual AccountType getAccountType() const;
 protected:
-	NormalAccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+	NormalAccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, const cDate_t& openingDate);
     virtual ~NormalAccountImpl();
 };

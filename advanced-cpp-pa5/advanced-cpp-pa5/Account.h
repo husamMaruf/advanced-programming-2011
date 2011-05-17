@@ -11,18 +11,18 @@ class AccountImpl;
 class Account : public Observer {
 public:
         
-    Account(Subject* subject, AccountType accountType, int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t& openingDate);
+    Account(Subject* subject, AccountType accountType, int accountNumber, int savingPeriod, double percentOnDeposit, const cDate_t& openingDate);
     Account(Subject* subject, AccountType accountType, int accountNumber, int savingPeriod, double percentOnDeposit);
 	virtual ~Account();
 		
 	virtual void Update(Subject* ChngSubject);
 
-    int getSavingPeriod();
-    cDate_t& getOpeningDate();
-    double getPercentOnDeposit();
-	AccountType getAccountType();
+    int getSavingPeriod() const;
+    const cDate_t& getOpeningDate() const;
+    double getPercentOnDeposit() const;
+	AccountType getAccountType() const;
 	void postMessage(const std::string& message);
-	int getAccountNumber();
+	int getAccountNumber() const;
 
 protected:
     AccountImpl* accountImpl;

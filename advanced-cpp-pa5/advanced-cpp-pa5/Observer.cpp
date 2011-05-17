@@ -12,6 +12,6 @@ void Observer::clearChanged() {
 	changed = false;
 }
 
-bool Observer::isChanged() {
+bool Observer::isChanged() const {
 	return changed;
 }
