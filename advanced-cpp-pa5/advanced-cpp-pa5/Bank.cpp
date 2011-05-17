@@ -16,12 +16,16 @@ Bank* Bank::getInstance() {
 }
 
 void Bank::destroyInstance() {
-    delete instance;
+    delete instance; //What about deleting all accounts from heap? maybe remove this method?
 	instance = 0;
 }
 
 int Bank::openNewAccount(AccountType accountType, int savingPeriod, double percentOnDeposit) {
-	m_accounts.push_back(new Account(this,accountType,accountNumberCounter,savingPeriod,percentOnDeposit));
+	return Bank::openNewAccount(accountType, savingPeriod, percentOnDeposit, cDate_t()); //Maybe should be on heap??? 
+}
+
+int Bank::openNewAccount(AccountType accountType, int savingPeriod, double percentOnDeposit, const cDate_t& openingDate) {
+	m_accounts.push_back(new Account(this,accountType,accountNumberCounter,savingPeriod,percentOnDeposit, openingDate));
 	accountNumberCounter++;
 	return accountNumberCounter-1;
 }

@@ -11,7 +11,7 @@ Account::Account(Subject* subject, AccountType accountType, int accountNumber, i
 Account::Account(Subject* subject, AccountType accountType, int accountNumber, int savingPeriod, double percentOnDeposit) {
 	sbj = subject;
 	sbj->Attach(this);
-	accountImpl = AccountFactory::createAccount(accountType, accountNumber, savingPeriod, percentOnDeposit, cDate_t());
+	accountImpl = AccountFactory::createAccount(accountType, accountNumber, savingPeriod, percentOnDeposit, cDate_t()); //Maybe should be on heap???
 }
 
 Account::~Account() {
