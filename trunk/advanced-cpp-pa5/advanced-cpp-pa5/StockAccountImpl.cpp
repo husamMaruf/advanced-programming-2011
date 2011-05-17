@@ -1,6 +1,6 @@
 #include "StockAccountImpl.h"
 
-StockAccountImpl::StockAccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t openingDate) :
+StockAccountImpl::StockAccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, const cDate_t& openingDate) :
 AccountImpl(accountNumber,savingPeriod,percentOnDeposit,openingDate) { }
 
 StockAccountImpl::~StockAccountImpl() { }
@@ -10,6 +10,6 @@ void StockAccountImpl::Update() {
 	cout << *getMesssage() << endl;
 }
 
-AccountType StockAccountImpl::getAccountType() {
+AccountType StockAccountImpl::getAccountType() const {
 	return 1;
 }

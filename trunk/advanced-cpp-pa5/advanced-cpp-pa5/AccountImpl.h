@@ -12,21 +12,21 @@ class AccountImpl {
 public:
    
     virtual void Update() = 0;
-	virtual AccountType getAccountType() = 0;
+	virtual AccountType getAccountType() const = 0;
 
-    int getSavingPeriod();
-    cDate_t getOpeningDate();
-    double getPercentOnDeposit();
+    int getSavingPeriod() const;
+    const cDate_t& getOpeningDate() const;
+    double getPercentOnDeposit() const;
     
-	string* getMesssage();
-	int getAccountNumber();
+	int getAccountNumber() const;
 
 	void setMessage(const string& message);
 
 protected:
 
-	AccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, cDate_t openingDate);
+	AccountImpl(int accountNumber, int savingPeriod, double percentOnDeposit, const cDate_t& openingDate);
     virtual ~AccountImpl();
+	const string* getMesssage() const;
 
 private:
 

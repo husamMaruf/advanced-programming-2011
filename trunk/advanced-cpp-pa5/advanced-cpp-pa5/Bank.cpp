@@ -4,7 +4,9 @@ Bank* Bank::instance = 0;
 
 Bank::Bank(): accountNumberCounter(1) { }
 
-Bank::~Bank() {}
+Bank::~Bank() {
+	
+}
 
 Bank* Bank::getInstance() {
     if (instance == 0) {

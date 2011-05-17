@@ -1,6 +1,6 @@
 #include "AccountFactory.h"
 
-AccountImpl* AccountFactory::createAccount(AccountType accountType, int accountNumber, int savingPeriod, double getPercentOnDeposit, cDate_t openingDate) {
+AccountImpl* AccountFactory::createAccount(AccountType accountType, int accountNumber, int savingPeriod, double getPercentOnDeposit, const cDate_t& openingDate) {
 	switch (accountType) {
 		case 1:
 			return new StockAccountImpl(accountNumber, savingPeriod, getPercentOnDeposit, openingDate);			

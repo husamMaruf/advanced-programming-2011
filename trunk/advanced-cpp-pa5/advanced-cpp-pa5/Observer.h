@@ -9,7 +9,7 @@ public:
 
 	void setChanged();
 	void clearChanged();
-	bool isChanged();
+	bool isChanged() const;
 
 protected:
 	Observer();
