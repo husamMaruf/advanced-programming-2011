@@ -115,23 +115,23 @@ void cDate_t::setDate(const int& day, const int& month, const int& year) throw(i
 
 }
 
-const int& cDate_t::getDay() const {
+int cDate_t::getDay() const {
 	return current_time.tm_mday; 
 }
 
-const int& cDate_t::getMonth() const {
+int cDate_t::getMonth() const {
 	return current_time.tm_mon+1;
 }
 
-const int& cDate_t::getYear() const {
+int cDate_t::getYear() const {
 	return current_time.tm_year+1900;
 }
 
-const int& cDate_t::getDayOfYear() const {
+int cDate_t::getDayOfYear() const {
 	return current_time.tm_yday+1;
 }
 
-const bool& cDate_t::isLeapYear() const {
+bool cDate_t::isLeapYear() const {
 	return getYear() % 4 == 0;
 }
 
@@ -145,10 +145,8 @@ const char* cDate_t::getMonthName() const {
 
 int cDate_t::calcYearsElapsed() const {
 	cDate_t currentDate;
-	int currentYear = currentDate.getYear();
-	int thisObjectYear = getYear();
-	int elapsedYears = currentYear-thisObjectYear;
-	if (currentDate.getMonth() < getMonth() ||
+	int elapsedYears = currentDate.getYear() - getYear();
+	if (currentDate.getMonth() < getMonth() || 
 	   (currentDate.getMonth() == getMonth() && currentDate.getDay() <= getDay())) {
 		elapsedYears--;
 	}

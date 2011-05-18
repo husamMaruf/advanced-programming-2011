@@ -41,12 +41,12 @@ public:
 	// throws ILLEGAL_DATE_PARAMS
 	void setDate(const int& day, const int& month, const int& year) throw(int);
 
-	const int& getDay() const;
-	const int& getMonth() const;
-	const int& getYear() const;
-	const int& getDayOfYear() const;
+	int getDay() const;
+	int getMonth() const;
+	int getYear() const;
+	int getDayOfYear() const;
 
-	const bool& isLeapYear() const;
+	bool isLeapYear() const;
 
 	const char* getDayName() const;
 	const char* getMonthName() const; 
