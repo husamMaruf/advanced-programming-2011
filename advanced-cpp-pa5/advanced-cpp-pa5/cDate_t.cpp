@@ -145,8 +145,11 @@ const char* cDate_t::getMonthName() const {
 
 int cDate_t::calcYearsElapsed() const {
 	cDate_t currentDate;
-	int elapsedYears = currentDate.getYear() - getYear();
-	if (currentDate.getMonth() < getMonth() || (currentDate.getMonth() == getMonth() && currentDate.getDay() <= getDay())) {
+	int currentYear = currentDate.getYear();
+	int thisObjectYear = getYear();
+	int elapsedYears = currentYear-thisObjectYear;
+	if (currentDate.getMonth() < getMonth() ||
+	   (currentDate.getMonth() == getMonth() && currentDate.getDay() <= getDay())) {
 		elapsedYears--;
 	}
 	return elapsedYears;

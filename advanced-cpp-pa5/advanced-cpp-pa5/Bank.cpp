@@ -16,12 +16,19 @@ Bank* Bank::getInstance() {
 }
 
 void Bank::destroyInstance() {
-    delete instance; //What about deleting all accounts from heap? maybe remove this method?
+	vector<Account*>::iterator it = instance->m_accounts.begin();
+	while (it != instance->m_accounts.end()) {
+		Account* account = *it;
+		delete account;
+	}
+	instance->m_accounts.clear();
+
+	delete instance; 
 	instance = 0;
 }
 
 int Bank::openNewAccount(AccountType accountType, int savingPeriod, double percentOnDeposit) {
-	return Bank::openNewAccount(accountType, savingPeriod, percentOnDeposit, cDate_t()); //Maybe should be on heap??? 
+	return Bank::openNewAccount(accountType, savingPeriod, percentOnDeposit, cDate_t()); 
 }
 
 int Bank::openNewAccount(AccountType accountType, int savingPeriod, double percentOnDeposit, const cDate_t& openingDate) {
