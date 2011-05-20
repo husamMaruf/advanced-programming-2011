@@ -4,12 +4,11 @@
 #include "DVDPlayer.h"
 #include "CDPlayer.h"
 #include "VCRPlayer.h"
-#include "AbsConsoleFactory.h"
-#include "DellConsoleFactory.h"
-#include "LGConsoleFactory.h"
-#include "SongConsoleFactory.h"
+#include "AbsPlayerFactory.h"
+#include "DellPlayerFactory.h"
+#include "LGPlayerFactory.h"
+#include "SonyPlayerFactory.h"
 
-#include <map>
 #include <iostream>
 #include <string>
 
@@ -17,18 +16,28 @@ using namespace std;
 
 class EntertainmentConsole {
 public:
-	explicit EntertainmentConsole(): idCounter(0) {}
-	virtual ~EntertainmentConsole() {}
+	explicit EntertainmentConsole();
+	virtual ~EntertainmentConsole();
 
-	int createPlayer(string brand, int type);
-	bool removePlayer(int playerID);
+	bool switchPlayer(const string& brand, int type);
 
-	void playPlayer(int playerID);
-	void stopPlayer(int playerID);
-	void forwardPlayer(int playerID);
-	void rewindPlayer(int playerID);
+	void play();
+	void stop();
+	void forward();
+	void rewind();
 
 private:
-	map<int,Player> players;
-	int idCounter;
+
+	void handleSwitchPlayer(Player* previousPlayer);
+
+	Player* currentPlayer;
+
+	DellCDPlayer* dellCDPlayer;
+	DellDVDPlayer* dellDVDPlayer;
+	DellVCRPlayer* dellVCRPlayer;
+	LGCDPlayer* lgCDPlayer;
+	LGDVDPlayer* lgDVDPlayer;
+	SonyDVDPlayer* sonyDVDPlayer;
+	SonyVCRPlayer* sonyVCRPlayer;
+
 };
