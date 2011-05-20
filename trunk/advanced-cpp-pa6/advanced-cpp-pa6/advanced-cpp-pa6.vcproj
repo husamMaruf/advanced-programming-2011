@@ -171,7 +171,47 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath=".\DellCDPlayer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DellDVDPlayer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DellPlayerFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\DellVCRPlayer.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\EntertainmentConsole.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LGCDPlayer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LGDVDPlayer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\LGPlayerFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SonyDVDPlayer.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SonyPlayerFactory.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\SonyVCRPlayer.cpp"
 				>
 			</File>
 		</Filter>
@@ -181,7 +221,7 @@
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
 			<File
-				RelativePath=".\AbsConsoleFactory.h"
+				RelativePath=".\AbsPlayerFactory.h"
 				>
 			</File>
 			<File
@@ -189,7 +229,19 @@
 				>
 			</File>
 			<File
-				RelativePath=".\DellConsoleFactory.h"
+				RelativePath=".\DellCDPlayer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DellDVDPlayer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DellPlayerFactory.h"
+				>
+			</File>
+			<File
+				RelativePath=".\DellVCRPlayer.h"
 				>
 			</File>
 			<File
@@ -201,7 +253,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\LGConsoleFactory.h"
+				RelativePath=".\LGCDPlayer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LGDVDPlayer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\LGPlayerFactory.h"
 				>
 			</File>
 			<File
@@ -209,7 +269,15 @@
 				>
 			</File>
 			<File
-				RelativePath=".\SonyConsoleFactory.h"
+				RelativePath=".\SonyDVDPlayer.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SonyPlayerFactory.h"
+				>
+			</File>
+			<File
+				RelativePath=".\SonyVCRPlayer.h"
 				>
 			</File>
 			<File

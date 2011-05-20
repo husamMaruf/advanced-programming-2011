@@ -6,9 +6,8 @@ using namespace std;
 
 class CDPlayer : public Player {
 public:
-	virtual void start() { cout << "CD Starting" << endl; }
-	virtual void stop() { cout << "CD Stoping" << endl; }
-	virtual void forward() { cout << "CD forwarding" << endl; }
-	virtual void rewind() { cout << "CD rewinding" << endl; }
-
+	virtual void start() = 0;
+	virtual void stop() = 0;
+	virtual void forward() = 0;
+	virtual void rewind() = 0;
 };
