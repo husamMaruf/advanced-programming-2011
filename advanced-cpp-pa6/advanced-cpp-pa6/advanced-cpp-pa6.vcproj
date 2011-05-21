@@ -214,6 +214,10 @@
 				RelativePath=".\SonyVCRPlayer.cpp"
 				>
 			</File>
+			<File
+				RelativePath=".\Tester.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
