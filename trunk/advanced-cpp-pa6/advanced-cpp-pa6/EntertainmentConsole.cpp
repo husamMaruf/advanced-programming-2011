@@ -121,4 +121,3 @@ void EntertainmentConsole::handleSwitchPlayer(Player* previousPlayer) {
 	}
 }
 
-void main() { }
