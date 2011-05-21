@@ -12,6 +12,7 @@ public:
 	virtual void rewind();
 	
 private:
-
 	SonyDVDPlayer() {}
+	SonyDVDPlayer(const SonyDVDPlayer&);
+	SonyDVDPlayer& operator=(const SonyDVDPlayer&);
 };

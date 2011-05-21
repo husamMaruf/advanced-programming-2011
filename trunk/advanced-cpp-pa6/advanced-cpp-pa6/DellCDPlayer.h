@@ -12,6 +12,7 @@ public:
 	virtual void rewind();
 
 private:
-
 	DellCDPlayer() {}
+	DellCDPlayer(const CDPlayer&);
+	DellCDPlayer& operator=(const CDPlayer&);
 };
