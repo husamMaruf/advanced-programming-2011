@@ -4,53 +4,42 @@ using namespace std;
 
 EntertainmentConsole::EntertainmentConsole() {
 	// setup console
-	DellPlayerFactory* dellPlayerFactory = new DellPlayerFactory();
-	LGPlayerFactory* lgPlayerFactory = new LGPlayerFactory();
-	SonyPlayerFactory* sonyPlayerFactory = new SonyPlayerFactory();
+	DellPlayerFactory dellPlayerFactory;
+	LGPlayerFactory lgPlayerFactory;
+	SonyPlayerFactory sonyPlayerFactory;
 
-	dellDVDPlayer = (DellDVDPlayer*)dellPlayerFactory->createPlayer(1);
-	dellCDPlayer = (DellCDPlayer*)dellPlayerFactory->createPlayer(2);
-	dellVCRPlayer = (DellVCRPlayer*)dellPlayerFactory->createPlayer(3);
+	dellDVDPlayer = (DellDVDPlayer*)dellPlayerFactory.createPlayer(1);
+	dellCDPlayer = (DellCDPlayer*)dellPlayerFactory.createPlayer(2);
+	dellVCRPlayer = (DellVCRPlayer*)dellPlayerFactory.createPlayer(3);
 
-	lgDVDPlayer = (LGDVDPlayer*)lgPlayerFactory->createPlayer(1);
-	lgCDPlayer = (LGCDPlayer*)lgPlayerFactory->createPlayer(2);
+	lgDVDPlayer = (LGDVDPlayer*)lgPlayerFactory.createPlayer(1);
+	lgCDPlayer = (LGCDPlayer*)lgPlayerFactory.createPlayer(2);
 
-	sonyDVDPlayer = (SonyDVDPlayer*)sonyPlayerFactory->createPlayer(1);
-	sonyVCRPlayer = (SonyVCRPlayer*)sonyPlayerFactory->createPlayer(3);
+	sonyDVDPlayer = (SonyDVDPlayer*)sonyPlayerFactory.createPlayer(1);
+	sonyVCRPlayer = (SonyVCRPlayer*)sonyPlayerFactory.createPlayer(3);
 
-	delete dellPlayerFactory;
-	delete lgPlayerFactory;
-	delete sonyPlayerFactory;
-
-	// arbitrarily choose a player as current player
+	// Arbitrarily choose a player as current player
 	currentPlayer = dellDVDPlayer;
-
 }
 
 EntertainmentConsole::~EntertainmentConsole() {
-
 	if (currentPlayer != 0) {
-		currentPlayer->stop();
+		stop();
 	}
 
-	DellPlayerFactory* dellPlayerFactory = new DellPlayerFactory();
-	LGPlayerFactory* lgPlayerFactory = new LGPlayerFactory();
-	SonyPlayerFactory* sonyPlayerFactory = new SonyPlayerFactory();
+	DellPlayerFactory dellPlayerFactory;
+	LGPlayerFactory lgPlayerFactory;
+	SonyPlayerFactory sonyPlayerFactory;
 
-	dellPlayerFactory->destroyPlayer(dellDVDPlayer);
-	dellPlayerFactory->destroyPlayer(dellCDPlayer);
-	dellPlayerFactory->destroyPlayer(dellVCRPlayer);
+	dellPlayerFactory.destroyPlayer(dellDVDPlayer);
+	dellPlayerFactory.destroyPlayer(dellCDPlayer);
+	dellPlayerFactory.destroyPlayer(dellVCRPlayer);
 
-	lgPlayerFactory->destroyPlayer(lgDVDPlayer);
-	lgPlayerFactory->destroyPlayer(lgCDPlayer);
+	lgPlayerFactory.destroyPlayer(lgDVDPlayer);
+	lgPlayerFactory.destroyPlayer(lgCDPlayer);
 
-	sonyPlayerFactory->destroyPlayer(sonyDVDPlayer);
-	sonyPlayerFactory->destroyPlayer(sonyVCRPlayer);
-
-	delete dellPlayerFactory;
-	delete lgPlayerFactory;
-	delete sonyPlayerFactory;
-
+	sonyPlayerFactory.destroyPlayer(sonyDVDPlayer);
+	sonyPlayerFactory.destroyPlayer(sonyVCRPlayer);
 }
 
 bool EntertainmentConsole::switchPlayer(const string& brand, int type) {
@@ -98,26 +87,37 @@ bool EntertainmentConsole::switchPlayer(const string& brand, int type) {
 }
 
 void EntertainmentConsole::play() {
-	currentPlayer->start();
+	if (currentPlayer->getState() != Player::PLAY) {
+		stop();
+		currentPlayer->start();
+	}
 }
 
 void EntertainmentConsole::stop() {
-	currentPlayer->stop();
+	if (currentPlayer->getState() != Player::STOP) {
+		currentPlayer->stop();
+	}
 }
 
 void EntertainmentConsole::forward() {
-	currentPlayer->forward();
+	if (currentPlayer->getState() != Player::FORWARD) {
+		stop();
+		currentPlayer->forward();
+	}
 }
 
 void EntertainmentConsole::rewind() {
-	currentPlayer->rewind();
+	if (currentPlayer->getState() != Player::REWIND) {
+		stop();
+		currentPlayer->rewind();
+	}
 }
 
 void EntertainmentConsole::handleSwitchPlayer(Player* previousPlayer) {
 	if (previousPlayer != 0) {
-		// this is an idempotent instruction so we don't really care if
-		// the player is actually doing something
-		previousPlayer->stop();
+		if (previousPlayer->getState() != Player::STOP) {
+			previousPlayer->stop();
+		}
 	}
 }
 
