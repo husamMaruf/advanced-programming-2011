@@ -12,6 +12,7 @@ public:
 	virtual void rewind();
 
 private:
-
 	LGDVDPlayer() {}
+	LGDVDPlayer(const LGDVDPlayer&);
+	LGDVDPlayer& operator=(const LGDVDPlayer&);
 };

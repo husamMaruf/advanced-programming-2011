@@ -12,6 +12,7 @@ public:
 	virtual void rewind();
 	
 private:
-
 	DellVCRPlayer() {}
+	DellVCRPlayer(const DellVCRPlayer&);
+	DellVCRPlayer& operator=(const DellVCRPlayer&);
 };

@@ -12,6 +12,7 @@ public:
 	virtual void rewind();
 
 private:
-
 	LGCDPlayer() {}
+	LGCDPlayer(const LGCDPlayer&);
+	LGCDPlayer& operator=(const LGCDPlayer&);
 };
